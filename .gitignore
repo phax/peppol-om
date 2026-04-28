@@ -1,0 +1,13 @@
+.claude/
+.settings/ 
+generated/
+target/
+
+*.iml
+private-*.properties
+
+.classpath  
+.DS_Store
+.pmd
+.project 
+zz

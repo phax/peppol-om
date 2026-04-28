@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pxs:TaxData xmlns:pxs="urn:peppol:schema:om-taxdata:1.0"
+             xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
+             xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+             xmlns:cec="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2">
+  <cbc:CustomizationID>urn:peppol:taxdata:om-1</cbc:CustomizationID>
+  <cbc:ProfileID>urn:peppol:taxreporting</cbc:ProfileID>
+  <cbc:UUID>f12f329f-6430-4399-b661-7c5cd9c3a9e6</cbc:UUID>
+  <cbc:IssueDate>2025-04-14</cbc:IssueDate>
+  <cbc:IssueTime>12:00:00Z</cbc:IssueTime>
+  <!-- F = Failed -->
+  <pxs:DocumentTypeCode>F</pxs:DocumentTypeCode>
+  <pxs:DocumentScope>D</pxs:DocumentScope>
+  <pxs:ReporterRole>01</pxs:ReporterRole>
+  <pxs:ReportingParty>
+    <cbc:EndpointID schemeID="0235">dummy-sender</cbc:EndpointID>
+  </pxs:ReportingParty>
+  <pxs:ReceivingParty>
+    <cbc:EndpointID schemeID="0242">dummy-receiver</cbc:EndpointID>
+  </pxs:ReceivingParty>
+  <pxs:ReportersRepresentative>
+    <cac:PartyIdentification>
+      <cbc:ID schemeID="0242">dummy-representative</cbc:ID>
+    </cac:PartyIdentification>
+  </pxs:ReportersRepresentative>
+
+  <pxs:ReportedTransaction>
+       
+    <!-- pxs:ReportedDocument is optional with type code "F" -->                                                  
+    
+    <pxs:SourceDocument>                                                          
+      <cec:ExtensionContent>                                                                              
+        <ubl:Invoice xmlns:ubl="urn:oasis:names:specification:ubl:schema:xsd:Invoice-2">                   
+          <!-- removed for readability -->
+        </ubl:Invoice>
+      </cec:ExtensionContent>
+    </pxs:SourceDocument>
+  </pxs:ReportedTransaction>
+</pxs:TaxData>
