@@ -52,9 +52,8 @@ to build the solution.
 
 # News and noteworthy
 
-v0.9.0 - work in progress
+v0.8.0 - 2026-04-28
 * Initial version
-* This version targets the OM TDD 1.0 release published at https://test-docs.peppol.eu/pint/pint-om/om-tdd/
 * Namespace URI is `urn:peppol:schema:om-taxdata:1.0`
 * Expected `CustomizationID` is `urn:peppol:taxdata:om-1`
 * Expected `ProfileID` is `urn:peppol:taxreporting`
