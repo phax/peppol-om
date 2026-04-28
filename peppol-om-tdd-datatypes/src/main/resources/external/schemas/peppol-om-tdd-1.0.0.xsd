@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-           xmlns:tns="urn:peppol:schema:om-taxdata:1.0"
+           xmlns:pxs="urn:peppol:schema:om-taxdata:1.0"
            xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
            xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
            xmlns:cec="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
@@ -8,20 +8,27 @@
            targetNamespace="urn:peppol:schema:om-taxdata:1.0"
            elementFormDefault="qualified"
            attributeFormDefault="unqualified">
-  <!--
-    OpenPeppol OM TDD schema
+  <!-- 
+    OpenPeppol TDD schema
+    
+    History:
+      v1.0.0 - 2025-11-18 - Philip Helger
+        - Changed the namespace URI to "urn:peppol:schema:om-taxdata:1.0"
+        - Added "schemaLocation" attribute to XS imports
+      v1.0.0-RC - 2025-08-10 - Philip Helger
+        - initial version
   -->
-
+  
   <!-- All imports refer to OASIS UBL 2.1 imports -->
   <xs:import namespace="urn:oasis:names:specification:ubl:schema:xsd:UnqualifiedDataTypes-2" />
   <xs:import namespace="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" />
   <xs:import namespace="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2" />
   <xs:import namespace="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" />
-
+  
   <xs:annotation>
-    <xs:documentation>OpenPeppol OM TDD XML Schema</xs:documentation>
+    <xs:documentation>OpenPeppol TDD XML Schema</xs:documentation>
   </xs:annotation>
-
+  
   <!-- XSD derived types in UBL style -->
 
   <xs:complexType name="TaxDataDocumentTypeCodeType">
@@ -53,7 +60,7 @@
       <xs:extension base="udt:CodeType" />
     </xs:simpleContent>
   </xs:complexType>
-
+  
   <xs:complexType name="MonetaryTotalType">
     <xs:annotation>
       <xs:documentation>
@@ -77,7 +84,7 @@
       </xs:element>
     </xs:sequence>
   </xs:complexType>
-
+  
   <xs:complexType name="ReportedDocumentType">
     <xs:sequence>
       <xs:element ref="cbc:CustomizationID" minOccurs="0" maxOccurs="1">
@@ -103,7 +110,7 @@
           <xs:documentation>Reported Document unique ID</xs:documentation>
         </xs:annotation>
       </xs:element>
-
+      
       <xs:element ref="cbc:IssueDate" minOccurs="0" maxOccurs="1">
         <xs:annotation>
           <xs:documentation>Reported Document issue date</xs:documentation>
@@ -121,37 +128,37 @@
           <xs:documentation>Reported Document type code</xs:documentation>
         </xs:annotation>
       </xs:element>
-
+      
       <xs:element ref="cbc:DocumentCurrencyCode" minOccurs="0" maxOccurs="1">
         <xs:annotation>
           <xs:documentation>Reported Document document currency code</xs:documentation>
         </xs:annotation>
       </xs:element>
-
+      
       <xs:element ref="cbc:TaxCurrencyCode" minOccurs="0" maxOccurs="1">
         <xs:annotation>
           <xs:documentation>Reported Document accounting currency code</xs:documentation>
         </xs:annotation>
       </xs:element>
-
+      
       <xs:element ref="cac:AccountingSupplierParty" minOccurs="0" maxOccurs="1">
         <xs:annotation>
           <xs:documentation>Reported Document accounting supplier party</xs:documentation>
         </xs:annotation>
       </xs:element>
-
+      
       <xs:element ref="cac:AccountingCustomerParty" minOccurs="0" maxOccurs="1">
         <xs:annotation>
           <xs:documentation>Reported Document accounting customer party</xs:documentation>
         </xs:annotation>
       </xs:element>
-
+      
       <xs:element ref="cac:TaxTotal" minOccurs="0" maxOccurs="unbounded">
         <xs:annotation>
           <xs:documentation>Reported Document tax total</xs:documentation>
         </xs:annotation>
       </xs:element>
-
+      
       <xs:element name="MonetaryTotal" type="tns:MonetaryTotalType" minOccurs="0" maxOccurs="unbounded">
         <xs:annotation>
           <xs:documentation>Reported Document legal monetary total</xs:documentation>
@@ -159,7 +166,7 @@
       </xs:element>
     </xs:sequence>
   </xs:complexType>
-
+  
   <xs:complexType name="CustomContentType">
     <xs:sequence>
       <xs:element ref="cbc:ID" minOccurs="1" maxOccurs="1">
@@ -181,7 +188,7 @@
       </xs:choice>
     </xs:sequence>
   </xs:complexType>
-
+  
   <xs:complexType name="ReportedTransactionType">
     <xs:sequence>
       <xs:element name="TransportHeaderID" type="tns:TransportHeaderIDType" minOccurs="0" maxOccurs="1">
@@ -209,7 +216,7 @@
       </xs:element>
     </xs:sequence>
   </xs:complexType>
-
+  
 
   <xs:complexType name="TaxDataType">
     <xs:annotation>
@@ -235,12 +242,12 @@
         </xs:annotation>
       </xs:element>
 
-      <xs:element ref="cbc:UUID" minOccurs="0" maxOccurs="1">
+      <xs:element ref="cbc:UUID" minOccurs="1" maxOccurs="1">
         <xs:annotation>
-          <xs:documentation>TDD unique ID</xs:documentation>
+          <xs:documentation>TDD UUID</xs:documentation>
         </xs:annotation>
       </xs:element>
-
+      
       <xs:element ref="cbc:IssueDate" minOccurs="1" maxOccurs="1">
         <xs:annotation>
           <xs:documentation>TDD issue date. Must not include a timezone.</xs:documentation>
@@ -270,25 +277,25 @@
           <xs:documentation>Reporters role</xs:documentation>
         </xs:annotation>
       </xs:element>
-
+      
       <xs:element name="ReportingParty" type="cac:PartyType" minOccurs="1" maxOccurs="1">
         <xs:annotation>
           <xs:documentation>TDD Reporter</xs:documentation>
         </xs:annotation>
       </xs:element>
-
+      
       <xs:element name="ReceivingParty" type="cac:PartyType" minOccurs="1" maxOccurs="1">
         <xs:annotation>
           <xs:documentation>TDD Receiver - usually a Tax Authority</xs:documentation>
         </xs:annotation>
       </xs:element>
-
+     
       <xs:element name="ReportersRepresentative" type="cac:PartyType" minOccurs="1" maxOccurs="1">
         <xs:annotation>
           <xs:documentation>TDD Reporters Representative</xs:documentation>
         </xs:annotation>
       </xs:element>
-
+     
       <xs:element name="ReportedTransaction" type="tns:ReportedTransactionType" minOccurs="0" maxOccurs="unbounded">
         <xs:annotation>
           <xs:documentation>Contains the details on the transmissions this TDD refers to</xs:documentation>

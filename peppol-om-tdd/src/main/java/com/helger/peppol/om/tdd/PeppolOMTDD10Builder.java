@@ -283,9 +283,7 @@ public class PeppolOMTDD10Builder implements IBuilder <TaxDataType>
   @NonNull
   public PeppolOMTDD10Builder reportedTransaction (@NonNull final Consumer <PeppolOMTDD10ReportedTransactionBuilder> aBuilderConsumer)
   {
-    if (m_eDocumentTypeCode == null)
-      throw new IllegalStateException ("The ReportedTransaction can only be built, after the DocumentTypeCode is set!");
-    final PeppolOMTDD10ReportedTransactionBuilder aBuilder = new PeppolOMTDD10ReportedTransactionBuilder (m_eDocumentTypeCode);
+    final PeppolOMTDD10ReportedTransactionBuilder aBuilder = new PeppolOMTDD10ReportedTransactionBuilder ();
     aBuilderConsumer.accept (aBuilder);
     return reportedTransaction (aBuilder.build ());
   }

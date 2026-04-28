@@ -24,13 +24,11 @@
   
   <pattern id="default">
     
-    <let name="cl_dtc" value="' S R W F '"/>
+    <let name="cl_dtc" value="' S R D '"/>
     <let name="cl_ds" value="' D IP INP '"/>
     <let name="cl_rr" value="' 01 02 '"/>
     <let name="cl_currency" value="' OMR AFN ALL AMD ANG AOA ARS AUD AWG AZN BAM BBD BDT BGN BHD BIF BMD BND BOB BOV BRL BSD BTN BWP BYN BZD CAD CDF CHE CHF CHW CLF CLP CNH CNY COP COU CRC CUP CVE CZK DJF DKK DOP DZD EGP ERN ETB EUR FJD FKP GBP GEL GHS GIP GMD GNF GTQ GYD HKD HNL HTG HUF IDR ILS INR IQD IRR ISK JMD JOD JPY KES KGS KHR KMF KPW KRW KWD KYD KZT LAK LBP LKR LRD LSL LYD MAD MDL MGA MKD MMK MNT MOP MRU MUR MVR MWK MXN MXV MYR MZN NAD NGN NIO NOK NPR NZD OMR PAB PEN PGK PHP PKR PLN PYG QAR RON RSD RUB RWF SAR SBD SCR SDG SEK SGD SHP SLE SOS SRD SSP STD SVC SYP SZL THB TJS TMT TND TOP TRY TTD TWD TZS UAH UGX USD USN UYI UYU UYW UZS VES VED VND VUV WST XAF XAG XAU XBA XBB XBC XBD XCD XDR XOF XPD XPF XPT XSU XTS XUA XXX YER ZAR ZMW ZWG '"/>
     <let name="regex_pidscheme" value="'^[0-9]{4}$'"/>
-    
-    <let name="checkForReportedDocument" value="normalize-space(/pxs:TaxData/pxs:DocumentTypeCode) != 'F'"/>
 
     
     <rule context="/pxs:TaxData">
@@ -55,7 +53,7 @@
       <assert id="ibr-tdd-04" flag="fatal" test="string-length(normalize-space(cbc:IssueDate)) = 10">[ibr-tdd-04] The Tax Data Document issue date (tdt-004) MUST NOT contain timezone information</assert>
 
       
-      <assert id="ibr-tdd-05" flag="fatal" test="matches(normalize-space(cbc:IssueTime), '^(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(.\d{1,9})?(?:Z|[+-](?:0\d|1[0-4]):[0-5]\d)$')">[ibr-tdd-05] The Tax Data Document issue time (tdt-005) MUST contain timezone information</assert>
+      <assert id="ibr-tdd-05" flag="fatal" test="matches(normalize-space(cbc:IssueTime), '^(([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]|24:00:00)(\.[0-9]+)?(Z|[+-][0-9]{2}:[0-9]{2})?$')">[ibr-tdd-05] The Tax Data Document issue time (tdt-005) MUST contain timezone information</assert>
       
       
       <assert id="ibr-tdd-06" flag="fatal" test="not(contains($dtc, ' ')) and contains($cl_dtc, concat(' ', $dtc, ' '))">[ibr-tdd-06] The Tax Data Document type code (tdt-006) (<value-of select="$dtc"/>) MUST be coded according to the code list</assert>
@@ -127,8 +125,8 @@
     <rule context="/pxs:TaxData/pxs:ReportedTransaction">
       <let name="ccCount" value="count(pxs:CustomContent)"/>
     
-      
-      <assert id="ibr-tdd-22" flag="fatal" test="exists(pxs:ReportedDocument) or not($checkForReportedDocument)">[ibr-tdd-22] The REPORTED DOCUMENT (tdg-02) MUST be present</assert>
+     
+      <assert id="ibr-tdd-22" flag="fatal" test="exists(pxs:ReportedDocument)">[ibr-tdd-22] The REPORTED DOCUMENT (tdg-02) MUST be present</assert>
     
       
 

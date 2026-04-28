@@ -35,13 +35,11 @@ import com.helger.annotation.Nonempty;
 import com.helger.base.builder.IBuilder;
 import com.helger.base.enforce.ValueEnforcer;
 import com.helger.base.log.ConditionalLogger;
-import com.helger.base.numeric.mutable.MutableInt;
 import com.helger.base.string.StringHelper;
 import com.helger.collection.commons.CommonsArrayList;
 import com.helger.collection.commons.ICommonsList;
 import com.helger.datetime.helper.PDTFactory;
 import com.helger.datetime.xml.XMLOffsetTime;
-import com.helger.peppol.om.tdd.codelist.EOMTDDDocumentTypeCode;
 import com.helger.peppol.om.tdd.v100.CustomContentType;
 import com.helger.peppol.om.tdd.v100.MonetaryTotalType;
 import com.helger.peppol.om.tdd.v100.ReferencedDocumentTypeCodeType;
@@ -114,7 +112,6 @@ public class PeppolOMTDD10ReportedTransactionBuilder implements IBuilder <Report
 
   private static final Logger LOGGER = LoggerFactory.getLogger (PeppolOMTDD10ReportedTransactionBuilder.class);
 
-  private final @NonNull EOMTDDDocumentTypeCode m_eDocumentTypeCode;
   private String m_sTransportHeaderID;
   private String m_sCustomizationID;
   private String m_sProfileID;
@@ -136,11 +133,8 @@ public class PeppolOMTDD10ReportedTransactionBuilder implements IBuilder <Report
   private final ICommonsList <CustomContent> m_aCustomContents = new CommonsArrayList <> ();
   private Element m_aSourceDocument;
 
-  public PeppolOMTDD10ReportedTransactionBuilder (@NonNull final EOMTDDDocumentTypeCode eDocumentTypeCode)
-  {
-    ValueEnforcer.notNull (eDocumentTypeCode, "DocumentTypeCode");
-    m_eDocumentTypeCode = eDocumentTypeCode;
-  }
+  public PeppolOMTDD10ReportedTransactionBuilder ()
+  {}
 
   @NonNull
   public static InvoiceType getWithoutEmbeddedDocumentBinaryObject (@NonNull final InvoiceType aInv)
@@ -633,7 +627,7 @@ public class PeppolOMTDD10ReportedTransactionBuilder implements IBuilder <Report
     return this;
   }
 
-  private boolean _isEveryRequiredFieldSet (final boolean bDoLogOnError, @NonNull final MutableInt aErrorCount)
+  public boolean isEveryRequiredFieldSet (final boolean bDoLogOnError)
   {
     int nErrs = 0;
     final ConditionalLogger aCondLog = new ConditionalLogger (LOGGER, bDoLogOnError);
@@ -646,48 +640,48 @@ public class PeppolOMTDD10ReportedTransactionBuilder implements IBuilder <Report
     if (StringHelper.isEmpty (m_sCustomizationID))
     {
       aCondLog.error (sErrorPrefix + "CustomizationID is missing");
-      aErrorCount.inc ();
+      nErrs++;
     }
     if (StringHelper.isEmpty (m_sProfileID))
     {
       aCondLog.error (sErrorPrefix + "ProfileID is missing");
-      aErrorCount.inc ();
+      nErrs++;
     }
     if (StringHelper.isEmpty (m_sID))
     {
       aCondLog.error (sErrorPrefix + "ID is missing");
-      aErrorCount.inc ();
+      nErrs++;
     }
     if (StringHelper.isEmpty (m_sUUID))
     {
       aCondLog.error (sErrorPrefix + "UUID is missing");
-      aErrorCount.inc ();
+      nErrs++;
     }
     if (m_aIssueDate == null)
     {
       aCondLog.error (sErrorPrefix + "IssueDate is missing");
-      aErrorCount.inc ();
+      nErrs++;
     }
     // IssueTime is optional
     if (StringHelper.isEmpty (m_sDocumentTypeCode))
     {
       aCondLog.error (sErrorPrefix + "DocumentTypeCode is missing");
-      aErrorCount.inc ();
+      nErrs++;
     }
     if (StringHelper.isEmpty (m_sDocumentCurrencyCode))
     {
       aCondLog.error (sErrorPrefix + "DocumentCurrencyCode is missing");
-      aErrorCount.inc ();
+      nErrs++;
     }
     if (StringHelper.isEmpty (m_sSellerTaxID))
     {
       aCondLog.error (sErrorPrefix + "SellerTaxID is missing");
-      aErrorCount.inc ();
+      nErrs++;
     }
     if (StringHelper.isEmpty (m_sSellerTaxSchemeID))
     {
       aCondLog.error (sErrorPrefix + "SellerTaxSchemeID is missing");
-      aErrorCount.inc ();
+      nErrs++;
     }
     if (StringHelper.isNotEmpty (m_sBuyerIDSchemeID))
     {
@@ -700,7 +694,7 @@ public class PeppolOMTDD10ReportedTransactionBuilder implements IBuilder <Report
     if (m_aTaxTotalAmountDocumentCurrency == null)
     {
       aCondLog.error (sErrorPrefix + "TaxTotalAmountDocumentCurrency is missing");
-      aErrorCount.inc ();
+      nErrs++;
     }
     if (m_aTaxTotalAmountTaxCurrency != null)
     {
@@ -708,7 +702,7 @@ public class PeppolOMTDD10ReportedTransactionBuilder implements IBuilder <Report
       {
         aCondLog.error (sErrorPrefix +
                         "If TaxTotalAmountTaxCurrency is provided, TaxCurrencyCode must also be provided");
-        aErrorCount.inc ();
+        nErrs++;
       }
     }
     else
@@ -717,18 +711,14 @@ public class PeppolOMTDD10ReportedTransactionBuilder implements IBuilder <Report
       {
         aCondLog.error (sErrorPrefix +
                         "If TaxCurrencyCode is provided, TaxTotalAmountTaxCurrency must also be provided");
-        aErrorCount.inc ();
+        nErrs++;
       }
     }
     if (m_aTaxExclusiveTotalAmount == null)
     {
       aCondLog.error (sErrorPrefix + "TaxExclusiveTotalAmount is missing");
-      aErrorCount.inc ();
+      nErrs++;
     }
-
-    // Failed TDDs don't need this
-    if (m_eDocumentTypeCode != EOMTDDDocumentTypeCode.FAILED)
-      nErrs += aErrorCount.intValue ();
 
     if (m_aSourceDocument == null)
     {
@@ -749,17 +739,10 @@ public class PeppolOMTDD10ReportedTransactionBuilder implements IBuilder <Report
     return nErrs == 0;
   }
 
-  public boolean isEveryRequiredFieldSet (final boolean bDoLogOnError)
-  {
-    final MutableInt aReportedDocErrs = new MutableInt (0);
-    return _isEveryRequiredFieldSet (bDoLogOnError, aReportedDocErrs);
-  }
-
   @Nullable
   public ReportedTransactionType build ()
   {
-    final MutableInt aReportedDocErrs = new MutableInt (0);
-    if (!_isEveryRequiredFieldSet (true, aReportedDocErrs))
+    if (!isEveryRequiredFieldSet (true))
     {
       LOGGER.error ("At least one mandatory field is not set and therefore the TDD ReportedTransaction cannot be build.");
       return null;
@@ -775,8 +758,6 @@ public class PeppolOMTDD10ReportedTransactionBuilder implements IBuilder <Report
       ret.setTransportHeaderID (a);
     }
 
-    // ReportedDocument - optional for FAILED state
-    if (m_eDocumentTypeCode != EOMTDDDocumentTypeCode.FAILED || aReportedDocErrs.is0 ())
     {
       final ReportedDocumentType a = new ReportedDocumentType ();
       if (StringHelper.isNotEmpty (m_sCustomizationID))

@@ -58,8 +58,6 @@ public final class PeppolOMTestFiles
   {
     return _getAll ("tdd/10/good/",
                     "commercial-invoice-tdd.xml",
-                    "example-tds-no-repdoc.xml",
-                    "example-tds-with-repdoc.xml",
                     "simple.xml",
                     "standard-invoice-tdd.xml",
                     "tax-currency.xml");

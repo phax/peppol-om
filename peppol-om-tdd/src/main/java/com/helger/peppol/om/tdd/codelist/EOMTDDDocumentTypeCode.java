@@ -34,10 +34,8 @@ public enum EOMTDDDocumentTypeCode implements IHasID <String>
   SUBMIT ("S"),
   /** TDD is sent to revise a previously reported TDD. */
   RESUBMIT ("R"),
-  /** A previously reported TDD is withdrawn. */
-  WITHDRAW ("W"),
-  /** Document failed validation. */
-  FAILED ("F");
+  /** Previously reported TDD is disregarded. */
+  DISREGARD ("D");
 
   private final String m_sID;
 
