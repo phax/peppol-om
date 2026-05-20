@@ -12,7 +12,7 @@
   <pxs:DocumentScope>D</pxs:DocumentScope>
   <pxs:ReporterRole>01</pxs:ReporterRole>
   <pxs:ReportingParty>
-    <cbc:EndpointID schemeID="0235">dummy-sender</cbc:EndpointID>
+    <cbc:EndpointID schemeID="0248">dummy-sender</cbc:EndpointID>
   </pxs:ReportingParty>
   <pxs:ReceivingParty>
     <cbc:EndpointID schemeID="0242">dummy-receiver</cbc:EndpointID>

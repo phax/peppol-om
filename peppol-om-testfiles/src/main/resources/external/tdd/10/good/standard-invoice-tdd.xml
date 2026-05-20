@@ -16,7 +16,7 @@
   <pxs:ReporterRole>01</pxs:ReporterRole>
 
   <pxs:ReportingParty>
-    <cbc:EndpointID schemeID="0235">1987654321</cbc:EndpointID>
+    <cbc:EndpointID schemeID="0248">1987654321</cbc:EndpointID>
   </pxs:ReportingParty>
 
   <pxs:ReceivingParty>
