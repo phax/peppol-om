@@ -26,7 +26,7 @@
   </parent>
   <groupId>com.helger.peppol</groupId>
   <artifactId>peppol-om-parent-pom</artifactId>
-  <version>0.9.0</version>
+  <version>0.9.1-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>peppol-om-parent-pom</name>
   <description>Peppol Oman (OM) support functions</description>
@@ -45,7 +45,7 @@
     <connection>scm:git:https://github.com/phax/peppol-om.git</connection>
     <developerConnection>scm:git:https://github.com/phax/peppol-om.git</developerConnection>
     <url>https://github.com/phax/peppol-om</url>
-    <tag>peppol-om-parent-pom-0.9.0</tag>
+    <tag>HEAD</tag>
   </scm>
 
   <organization>
