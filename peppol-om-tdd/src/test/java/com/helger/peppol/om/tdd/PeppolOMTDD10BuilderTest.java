@@ -71,6 +71,13 @@ public final class PeppolOMTDD10BuilderTest
                                                         .reportersRepresentative (aIF.createParticipantIdentifierWithDefaultScheme ("0242:987654"))
                                                         // Provide all fields manually
                                                         .reportedTransaction (rt -> rt.transportHeaderID ("my-sbdh-uuid-12345678")
+                                                                                      .receivedDate (PDTFactory.createLocalDate (2026,
+                                                                                                                                 Month.APRIL,
+                                                                                                                                 29))
+                                                                                      .receivedTime (PDTFactory.createOffsetTime (9,
+                                                                                                                                  0,
+                                                                                                                                  0,
+                                                                                                                                  ZoneOffset.UTC))
                                                                                       .customizationID ("urn:peppol:pint:billing-1@om-1")
                                                                                       .profileID ("urn:peppol:bis:billing")
                                                                                       .id ("invoice-1")
@@ -126,6 +133,13 @@ public final class PeppolOMTDD10BuilderTest
                                                         .reportersRepresentative (aIF.createParticipantIdentifierWithDefaultScheme ("0242:987654"))
                                                         // Provide all fields manually
                                                         .reportedTransaction (rt -> rt.transportHeaderID ("my-sbdh-uuid-12345678")
+                                                                                      .receivedDate (PDTFactory.createLocalDate (2026,
+                                                                                                                                 Month.APRIL,
+                                                                                                                                 29))
+                                                                                      .receivedTime (PDTFactory.createOffsetTime (9,
+                                                                                                                                  0,
+                                                                                                                                  0,
+                                                                                                                                  ZoneOffset.UTC))
                                                                                       .customizationID ("urn:peppol:pint:billing-1@om-1")
                                                                                       .profileID ("urn:peppol:bis:billing")
                                                                                       .id ("invoice-1")

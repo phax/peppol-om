@@ -27,7 +27,7 @@
     <let name="cl_dtc" value="' S R D '"/>
     <let name="cl_ds" value="' D IP INP '"/>
     <let name="cl_rr" value="' 01 02 '"/>
-    <let name="cl_currency" value="' OMR AFN ALL AMD ANG AOA ARS AUD AWG AZN BAM BBD BDT BGN BHD BIF BMD BND BOB BOV BRL BSD BTN BWP BYN BZD CAD CDF CHE CHF CHW CLF CLP CNH CNY COP COU CRC CUP CVE CZK DJF DKK DOP DZD EGP ERN ETB EUR FJD FKP GBP GEL GHS GIP GMD GNF GTQ GYD HKD HNL HTG HUF IDR ILS INR IQD IRR ISK JMD JOD JPY KES KGS KHR KMF KPW KRW KWD KYD KZT LAK LBP LKR LRD LSL LYD MAD MDL MGA MKD MMK MNT MOP MRU MUR MVR MWK MXN MXV MYR MZN NAD NGN NIO NOK NPR NZD OMR PAB PEN PGK PHP PKR PLN PYG QAR RON RSD RUB RWF SAR SBD SCR SDG SEK SGD SHP SLE SOS SRD SSP STD SVC SYP SZL THB TJS TMT TND TOP TRY TTD TWD TZS UAH UGX USD USN UYI UYU UYW UZS VES VED VND VUV WST XAF XAG XAU XBA XBB XBC XBD XCD XDR XOF XPD XPF XPT XSU XTS XUA XXX YER ZAR ZMW ZWG '"/>
+    <let name="cl_currency" value="' OMR AFN ALL AMD AOA ARS AUD AWG AZN BAM BBD BDT BHD BIF BMD BND BOB BOV BRL BSD BTN BWP BYN BZD CAD CDF CHE CHF CHW CLF CLP CNH CNY COP COU CRC CUP CVE CZK DJF DKK DOP DZD EGP ERN ETB EUR FJD FKP GBP GEL GHS GIP GMD GNF GTQ GYD HKD HNL HTG HUF IDR ILS INR IQD IRR ISK JMD JOD JPY KES KGS KHR KMF KPW KRW KWD KYD KZT LAK LBP LKR LRD LSL LYD MAD MDL MGA MKD MMK MNT MOP MRU MUR MVR MWK MXN MXV MYR MZN NAD NGN NIO NOK NPR NZD OMR PAB PEN PGK PHP PKR PLN PYG QAR RON RSD RUB RWF SAR SBD SCR SDG SEK SGD SHP SLE SOS SRD SSP STD SVC SYP SZL THB TJS TMT TND TOP TRY TTD TWD TZS UAH UGX USD USN UYI UYU UYW UZS VES VED VND VUV WST XAF XAG XAU XBA XBB XBC XBD XCD XCG XDR XOF XPD XPF XPT XSU XTS XUA XXX YER ZAR ZMW ZWG '"/>
     <let name="regex_pidscheme" value="'^[0-9]{4}$'"/>
 
     
@@ -124,8 +124,11 @@
     
     <rule context="/pxs:TaxData/pxs:ReportedTransaction">
       <let name="ccCount" value="count(pxs:CustomContent)"/>
-    
-     
+      
+     <assert id="ibr-tdd-59" flag="fatal" test="exists(cbc:IssueDate)">[ibr-tdd-59] The date when the original document was received (tdom-04) MUST be present</assert>
+
+      <assert id="ibr-tdd-60" flag="fatal" test="matches(normalize-space(cbc:IssueTime), '^(([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]|24:00:00)(\.[0-9]+)?(Z|[+-][0-9]{2}:[0-9]{2})?$')">[ibr-tdd-60] The time when the original document was received (tdom-05) MUST be present</assert>
+
       <assert id="ibr-tdd-22" flag="fatal" test="exists(pxs:ReportedDocument)">[ibr-tdd-22] The REPORTED DOCUMENT (tdg-02) MUST be present</assert>
     
       

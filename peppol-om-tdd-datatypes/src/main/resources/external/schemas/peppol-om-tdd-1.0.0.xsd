@@ -8,10 +8,12 @@
            targetNamespace="urn:peppol:schema:om-taxdata:1.0"
            elementFormDefault="qualified"
            attributeFormDefault="unqualified">
-  <!-- 
+  <!--
     OpenPeppol TDD schema
-    
+
     History:
+      v1.0.0 - 2026-06-09 - Philip Helger
+        - Added optional "cbc:IssueDate" and "cbc:IssueTime" to "ReportedTransactionType" (tdom-04 / tdom-05, mandated by Schematron rules ibr-tdd-59 / ibr-tdd-60 introduced in the 2026-Q2-FIN snapshot)
       v1.0.0 - 2025-11-18 - Philip Helger
         - Changed the namespace URI to "urn:peppol:schema:om-taxdata:1.0"
         - Added "schemaLocation" attribute to XS imports
@@ -194,6 +196,18 @@
       <xs:element name="TransportHeaderID" type="tns:TransportHeaderIDType" minOccurs="0" maxOccurs="1">
         <xs:annotation>
           <xs:documentation>Reported Document transport header (SBDH) unique ID</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+
+      <xs:element ref="cbc:IssueDate" minOccurs="0" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>The date when the original document was received (tdom-04). Presence is enforced by Schematron rule ibr-tdd-59.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+
+      <xs:element ref="cbc:IssueTime" minOccurs="0" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>The time when the original document was received (tdom-05). Presence is enforced by Schematron rule ibr-tdd-60.</xs:documentation>
         </xs:annotation>
       </xs:element>
 

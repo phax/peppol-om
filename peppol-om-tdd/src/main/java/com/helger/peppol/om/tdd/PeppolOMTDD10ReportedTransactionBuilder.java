@@ -113,6 +113,8 @@ public class PeppolOMTDD10ReportedTransactionBuilder implements IBuilder <Report
   private static final Logger LOGGER = LoggerFactory.getLogger (PeppolOMTDD10ReportedTransactionBuilder.class);
 
   private String m_sTransportHeaderID;
+  private LocalDate m_aReceivedDate;
+  private OffsetTime m_aReceivedTime;
   private String m_sCustomizationID;
   private String m_sProfileID;
   private String m_sID;
@@ -356,6 +358,65 @@ public class PeppolOMTDD10ReportedTransactionBuilder implements IBuilder <Report
   {
     m_sTransportHeaderID = s;
     return this;
+  }
+
+  @Nullable
+  public LocalDate receivedDate ()
+  {
+    return m_aReceivedDate;
+  }
+
+  /**
+   * Set the date when the original document was received (tdom-04). Mandatory per Schematron rule
+   * ibr-tdd-59. Distinct from {@link #issueDate(LocalDate)}, which is the original document's own
+   * issue date.
+   *
+   * @param a
+   *        The received date. May be <code>null</code>.
+   * @return this for chaining
+   */
+  @NonNull
+  public PeppolOMTDD10ReportedTransactionBuilder receivedDate (@Nullable final LocalDate a)
+  {
+    m_aReceivedDate = a;
+    return this;
+  }
+
+  @Nullable
+  public OffsetTime receivedTime ()
+  {
+    return m_aReceivedTime;
+  }
+
+  @NonNull
+  public PeppolOMTDD10ReportedTransactionBuilder receivedTime (@Nullable final XMLOffsetTime a)
+  {
+    return receivedTime (a == null ? null : a.toOffsetTime ());
+  }
+
+  /**
+   * Set the time when the original document was received (tdom-05). Mandatory per Schematron rule
+   * ibr-tdd-60. Distinct from {@link #issueTime(OffsetTime)}, which is the original document's own
+   * issue time.
+   *
+   * @param a
+   *        The received time. May be <code>null</code>.
+   * @return this for chaining
+   */
+  @NonNull
+  public PeppolOMTDD10ReportedTransactionBuilder receivedTime (@Nullable final OffsetTime a)
+  {
+    // XSD can only handle milliseconds
+    m_aReceivedTime = PDTFactory.getWithMillisOnly (a);
+    return this;
+  }
+
+  @NonNull
+  public PeppolOMTDD10ReportedTransactionBuilder receivedDateTime (@Nullable final OffsetDateTime a)
+  {
+    if (a == null)
+      return receivedDate (null).receivedTime ((OffsetTime) null);
+    return receivedDate (a.toLocalDate ()).receivedTime (a.toOffsetTime ());
   }
 
   @Nullable
@@ -636,6 +697,18 @@ public class PeppolOMTDD10ReportedTransactionBuilder implements IBuilder <Report
 
     // TransportHeaderID is optional
 
+    // ReportedTransaction received-on date/time (tdom-04 / tdom-05, ibr-tdd-59 / ibr-tdd-60)
+    if (m_aReceivedDate == null)
+    {
+      aCondLog.error (sErrorPrefix + "ReceivedDate is missing");
+      nErrs++;
+    }
+    if (m_aReceivedTime == null)
+    {
+      aCondLog.error (sErrorPrefix + "ReceivedTime is missing");
+      nErrs++;
+    }
+
     // Check all ReportedDocument fields
     if (StringHelper.isEmpty (m_sCustomizationID))
     {
@@ -757,6 +830,12 @@ public class PeppolOMTDD10ReportedTransactionBuilder implements IBuilder <Report
       a.setValue (m_sTransportHeaderID);
       ret.setTransportHeaderID (a);
     }
+
+    // tdom-04 / tdom-05 - when the original document was received
+    if (m_aReceivedDate != null)
+      ret.setIssueDate (new IssueDateType (m_aReceivedDate));
+    if (m_aReceivedTime != null)
+      ret.setIssueTime (new IssueTimeType (XMLOffsetTime.of (m_aReceivedTime)));
 
     {
       final ReportedDocumentType a = new ReportedDocumentType ();

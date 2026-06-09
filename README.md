@@ -54,6 +54,9 @@ to build the solution.
 
 # News and noteworthy
 
+v0.9.0 - 2026-06-09
+* Updated to the latest XSD + Schematron
+
 v0.8.0 - 2026-04-28
 * Initial version
 * Namespace URI is `urn:peppol:schema:om-taxdata:1.0`
