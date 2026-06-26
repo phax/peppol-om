@@ -125,9 +125,9 @@
     <rule context="/pxs:TaxData/pxs:ReportedTransaction">
       <let name="ccCount" value="count(pxs:CustomContent)"/>
       
-     <assert id="ibr-tdd-59" flag="fatal" test="exists(cbc:IssueDate)">[ibr-tdd-59] The date when the original document was received (tdom-04) MUST be present</assert>
+     <assert id="ibr-tdd-59" flag="fatal" test="exists(cbc:IssueDate)">[ibr-tdd-59] The date when the invoice or invoice data was received by C2 from C1, or by C3 from C2 (tdom-04) MUST be present</assert>
 
-      <assert id="ibr-tdd-60" flag="fatal" test="matches(normalize-space(cbc:IssueTime), '^(([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]|24:00:00)(\.[0-9]+)?(Z|[+-][0-9]{2}:[0-9]{2})?$')">[ibr-tdd-60] The time when the original document was received (tdom-05) MUST be present</assert>
+      <assert id="ibr-tdd-60" flag="fatal" test="matches(normalize-space(cbc:IssueTime), '^(([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]|24:00:00)(\.[0-9]+)?(Z|[+-][0-9]{2}:[0-9]{2})?$')">[ibr-tdd-60] The time when the invoice or invoice data was received by C2 from C1, or by C3 from C2 (tdom-05) MUST be present</assert>
 
       <assert id="ibr-tdd-22" flag="fatal" test="exists(pxs:ReportedDocument)">[ibr-tdd-22] The REPORTED DOCUMENT (tdg-02) MUST be present</assert>
     

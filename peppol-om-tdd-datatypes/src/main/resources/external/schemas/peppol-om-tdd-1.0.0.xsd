@@ -12,6 +12,8 @@
     OpenPeppol TDD schema
 
     History:
+      v1.0.0 - 2026-06-26 - Philip Helger
+        - Aligned the "cbc:IssueDate" / "cbc:IssueTime" documentation wording with the final v1.0.0 release (23 Jun 2026) published at https://docs.peppol.eu/poac/om/om-tdd/
       v1.0.0 - 2026-06-09 - Philip Helger
         - Added optional "cbc:IssueDate" and "cbc:IssueTime" to "ReportedTransactionType" (tdom-04 / tdom-05, mandated by Schematron rules ibr-tdd-59 / ibr-tdd-60 introduced in the 2026-Q2-FIN snapshot)
       v1.0.0 - 2025-11-18 - Philip Helger
@@ -201,13 +203,13 @@
 
       <xs:element ref="cbc:IssueDate" minOccurs="0" maxOccurs="1">
         <xs:annotation>
-          <xs:documentation>The date when the original document was received (tdom-04). Presence is enforced by Schematron rule ibr-tdd-59.</xs:documentation>
+          <xs:documentation>The date when the invoice or invoice data was received by C2 from C1, or by C3 from C2 (tdom-04). Presence is enforced by Schematron rule ibr-tdd-59.</xs:documentation>
         </xs:annotation>
       </xs:element>
 
       <xs:element ref="cbc:IssueTime" minOccurs="0" maxOccurs="1">
         <xs:annotation>
-          <xs:documentation>The time when the original document was received (tdom-05). Presence is enforced by Schematron rule ibr-tdd-60.</xs:documentation>
+          <xs:documentation>The time when the invoice or invoice data was received by C2 from C1, or by C3 from C2 (tdom-05). Presence is enforced by Schematron rule ibr-tdd-60.</xs:documentation>
         </xs:annotation>
       </xs:element>
 

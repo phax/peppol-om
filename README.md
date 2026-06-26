@@ -16,8 +16,8 @@ They are licensed under the Apache 2.0 license.
 The minimum requirement is Java 17.
 
 The backing specifications are:
-* TDD OM: https://test-docs.peppol.eu/pint/pint-om/om-tdd/
-* PINT OM: https://test-docs.peppol.eu/pint/pint-om/
+* TDD OM: https://docs.peppol.eu/poac/om/om-tdd/
+* PINT OM: https://docs.peppol.eu/poac/om/pint-om/
 
 # Submodules
 
@@ -53,6 +53,9 @@ mvn clean install
 to build the solution.
 
 # News and noteworthy
+
+v1.0.0 - 2026-06-26
+* Synchronized XSD, Schematron and example files with the final OM TDD v1.0.0 release (2026-06-23)
 
 v0.9.0 - 2026-06-09
 * Updated to the latest XSD + Schematron
