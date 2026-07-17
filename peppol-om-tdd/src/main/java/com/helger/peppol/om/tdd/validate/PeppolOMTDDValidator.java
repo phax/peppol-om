@@ -33,7 +33,8 @@ public final class PeppolOMTDDValidator
 {
   public static final String SCH_OM_TDD_100_PATH = "external/schematron/peppol-om-tdd-1.0.0.sch";
 
-  private static final ISchematronResource OM_TDD_100 = SchematronResourceSCH.fromClassPath (SCH_OM_TDD_100_PATH);
+  private static final ISchematronResource OM_TDD_100 = SchematronResourceSCH.builderFromClassPath (SCH_OM_TDD_100_PATH)
+                                                                             .build ();
 
   static
   {

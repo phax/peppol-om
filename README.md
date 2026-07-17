@@ -54,6 +54,9 @@ to build the solution.
 
 # News and noteworthy
 
+v1.1.0 - 2026-07-17
+* Updated to ph-schematron v10.x
+
 v1.0.0 - 2026-06-26
 * Synchronized XSD, Schematron and example files with the final OM TDD v1.0.0 release (2026-06-23)
 

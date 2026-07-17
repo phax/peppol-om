@@ -110,7 +110,7 @@ public final class PeppolOMTDD10BuilderTest
     final SchematronOutputType aSVRL = aSCHRes.applySchematronValidationToSVRL (new ReadableResourceString (sXML,
                                                                                                             StandardCharsets.UTF_8));
     assertNotNull (aSVRL);
-    assertTrue (aSVRL.getActivePatternAndFiredRuleAndFailedAssert ()
+    assertTrue (aSVRL.getActivePatternOrActiveGroupAndFiredRule ()
                      .stream ()
                      .filter (FiredRule.class::isInstance)
                      .map (FiredRule.class::cast)
@@ -180,7 +180,7 @@ public final class PeppolOMTDD10BuilderTest
     final SchematronOutputType aSVRL = aSCHRes.applySchematronValidationToSVRL (new ReadableResourceString (sXML,
                                                                                                             StandardCharsets.UTF_8));
     assertNotNull (aSVRL);
-    assertTrue (aSVRL.getActivePatternAndFiredRuleAndFailedAssert ()
+    assertTrue (aSVRL.getActivePatternOrActiveGroupAndFiredRule ()
                      .stream ()
                      .filter (FiredRule.class::isInstance)
                      .map (FiredRule.class::cast)
