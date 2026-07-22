@@ -39,7 +39,7 @@ public final class CPeppolOMTDD
   /**
    * XML Schema resources for Peppol OM TDD XSD 1.0
    */
-  public static final String TDD_XSD_1_0_PATH = "/external/schemas/peppol-om-tdd-1.0.0.xsd";
+  public static final String TDD_XSD_1_0_PATH = "/external/schemas/peppol-om-tdd-1.0.1.xsd";
 
   /**
    * XML Schema resources for Peppol OM TDD XSD 1.0
