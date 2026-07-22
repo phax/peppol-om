@@ -45,6 +45,9 @@
               <cbc:ID>anything</cbc:ID>
             </cac:TaxScheme>
           </cac:PartyTaxScheme>
+          <cac:PartyLegalEntity>
+            <cbc:RegistrationName>Seller name</cbc:RegistrationName>
+          </cac:PartyLegalEntity>
         </cac:Party>
       </cac:AccountingSupplierParty>
 
@@ -56,6 +59,9 @@
             <cac:TaxScheme>
             </cac:TaxScheme>
           </cac:PartyTaxScheme>
+          <cac:PartyLegalEntity>
+            <cbc:RegistrationName>Buyer name</cbc:RegistrationName>
+          </cac:PartyLegalEntity>
         </cac:Party>
       </cac:AccountingCustomerParty>
 

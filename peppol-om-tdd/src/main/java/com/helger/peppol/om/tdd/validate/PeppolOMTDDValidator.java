@@ -31,14 +31,19 @@ import com.helger.schematron.sch.SchematronResourceSCH;
 @Immutable
 public final class PeppolOMTDDValidator
 {
+  @Deprecated (forRemoval = true, since = "1.2.0")
   public static final String SCH_OM_TDD_100_PATH = "external/schematron/peppol-om-tdd-1.0.0.sch";
+  public static final String SCH_OM_TDD_101_PATH = "external/schematron/peppol-om-tdd-1.0.1.sch";
 
+  @Deprecated (forRemoval = true, since = "1.2.0")
   private static final ISchematronResource OM_TDD_100 = SchematronResourceSCH.builderFromClassPath (SCH_OM_TDD_100_PATH)
+                                                                             .build ();
+  private static final ISchematronResource OM_TDD_101 = SchematronResourceSCH.builderFromClassPath (SCH_OM_TDD_101_PATH)
                                                                              .build ();
 
   static
   {
-    for (final ISchematronResource aSch : new ISchematronResource [] { OM_TDD_100 })
+    for (final ISchematronResource aSch : new ISchematronResource [] { OM_TDD_100, OM_TDD_101 })
       if (!aSch.isValidSchematron ())
         throw new InitializationException ("Schematron in " + aSch.getResource ().getPath () + " is invalid");
   }
@@ -50,9 +55,19 @@ public final class PeppolOMTDDValidator
    * @return Schematron OM TDD v1.0.0
    */
   @NonNull
+  @Deprecated (forRemoval = true, since = "1.2.0")
   public static ISchematronResource getSchematronOM_TDD_100 ()
   {
     return OM_TDD_100;
+  }
+
+  /**
+   * @return Schematron OM TDD v1.0.1
+   */
+  @NonNull
+  public static ISchematronResource getSchematronOM_TDD_101 ()
+  {
+    return OM_TDD_101;
   }
 
   /**
@@ -61,6 +76,6 @@ public final class PeppolOMTDDValidator
   @NonNull
   public static ISchematronResource getSchematronOM_TDD_10 ()
   {
-    return getSchematronOM_TDD_100 ();
+    return getSchematronOM_TDD_101 ();
   }
 }

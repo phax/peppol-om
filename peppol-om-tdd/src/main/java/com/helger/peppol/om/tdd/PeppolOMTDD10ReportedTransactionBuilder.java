@@ -40,12 +40,12 @@ import com.helger.collection.commons.CommonsArrayList;
 import com.helger.collection.commons.ICommonsList;
 import com.helger.datetime.helper.PDTFactory;
 import com.helger.datetime.xml.XMLOffsetTime;
-import com.helger.peppol.om.tdd.v100.CustomContentType;
-import com.helger.peppol.om.tdd.v100.MonetaryTotalType;
-import com.helger.peppol.om.tdd.v100.ReferencedDocumentTypeCodeType;
-import com.helger.peppol.om.tdd.v100.ReportedDocumentType;
-import com.helger.peppol.om.tdd.v100.ReportedTransactionType;
-import com.helger.peppol.om.tdd.v100.TransportHeaderIDType;
+import com.helger.peppol.om.tdd.v10.CustomContentType;
+import com.helger.peppol.om.tdd.v10.MonetaryTotalType;
+import com.helger.peppol.om.tdd.v10.ReferencedDocumentTypeCodeType;
+import com.helger.peppol.om.tdd.v10.ReportedDocumentType;
+import com.helger.peppol.om.tdd.v10.ReportedTransactionType;
+import com.helger.peppol.om.tdd.v10.TransportHeaderIDType;
 import com.helger.ubl21.UBL21Marshaller;
 import com.helger.xml.XMLHelper;
 
@@ -88,8 +88,8 @@ public class PeppolOMTDD10ReportedTransactionBuilder implements IBuilder <Report
     public CustomContent (@NonNull @Nonempty final String sID, @NonNull @Nonempty final String sValue)
     {
       ValueEnforcer.notEmpty (sID, "ID");
-      ValueEnforcer.isTrue ( () -> sID.equals (sID.toUpperCase (Locale.ROOT)),
-                             () -> "ID '" + sID + "' must be all uppercase");
+      ValueEnforcer.isTrue (() -> sID.equals (sID.toUpperCase (Locale.ROOT)),
+                            () -> "ID '" + sID + "' must be all uppercase");
       ValueEnforcer.notEmpty (sValue, "Value");
       m_sID = sID;
       m_sValue = sValue;
@@ -802,7 +802,7 @@ public class PeppolOMTDD10ReportedTransactionBuilder implements IBuilder <Report
     {
       final QName aQName = XMLHelper.getQName (m_aSourceDocument);
       if (!aQName.equals (UBL21Marshaller.invoice ().getRootElementQName ()) &&
-          !aQName.equals (UBL21Marshaller.creditNote ().getRootElementQName ()))
+        !aQName.equals (UBL21Marshaller.creditNote ().getRootElementQName ()))
       {
         aCondLog.error (sErrorPrefix + "SourceDocument must be a UBL 2.1 Invoice or CreditNote");
         nErrs++;

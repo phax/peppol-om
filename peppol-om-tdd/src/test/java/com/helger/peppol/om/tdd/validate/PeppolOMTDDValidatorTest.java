@@ -27,7 +27,7 @@ import com.helger.collection.commons.CommonsArrayList;
 import com.helger.io.resource.IReadableResource;
 import com.helger.peppol.om.tdd.jaxb.PeppolOMTDD10Marshaller;
 import com.helger.peppol.om.tdd.testfiles.PeppolOMTestFiles;
-import com.helger.peppol.om.tdd.v100.TaxDataType;
+import com.helger.peppol.om.tdd.v10.TaxDataType;
 import com.helger.schematron.ISchematronResource;
 import com.helger.schematron.svrl.SVRLHelper;
 import com.helger.schematron.svrl.SVRLMarshaller;

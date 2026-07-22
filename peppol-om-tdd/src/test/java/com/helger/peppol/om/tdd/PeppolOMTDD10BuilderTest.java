@@ -37,7 +37,7 @@ import com.helger.peppol.om.tdd.codelist.EOMTDDDocumentScope;
 import com.helger.peppol.om.tdd.codelist.EOMTDDDocumentTypeCode;
 import com.helger.peppol.om.tdd.codelist.EOMTDDReporterRole;
 import com.helger.peppol.om.tdd.jaxb.PeppolOMTDD10Marshaller;
-import com.helger.peppol.om.tdd.v100.TaxDataType;
+import com.helger.peppol.om.tdd.v10.TaxDataType;
 import com.helger.peppol.om.tdd.validate.PeppolOMTDDValidator;
 import com.helger.peppolid.factory.IIdentifierFactory;
 import com.helger.peppolid.factory.PeppolIdentifierFactory;

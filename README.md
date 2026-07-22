@@ -54,6 +54,11 @@ to build the solution.
 
 # News and noteworthy
 
+v1.2.0 - 2026-07-22
+* Synchronized XSD, Schematron and example files with the OM TDD 2026-Q2-v1.0.1 release (2026-07-17)
+* Added the new mandatory Schematron rules `ibr-tdd-61`/`ibr-tdd-62` (Seller name) and `ibr-tdd-63`/`ibr-tdd-64` (Buyer name)
+* Generated JAXB classes moved from package `com.helger.peppol.om.tdd.v100` to `com.helger.peppol.om.tdd.v10`
+
 v1.1.0 - 2026-07-17
 * Updated to ph-schematron v10.x
 

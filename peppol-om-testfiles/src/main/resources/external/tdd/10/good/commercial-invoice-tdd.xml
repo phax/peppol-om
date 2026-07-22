@@ -55,6 +55,9 @@
               <cbc:ID>!VAT</cbc:ID>
             </cac:TaxScheme>
           </cac:PartyTaxScheme>
+          <cac:PartyLegalEntity>
+            <cbc:RegistrationName>Seller name</cbc:RegistrationName>
+          </cac:PartyLegalEntity>
         </cac:Party>
       </cac:AccountingSupplierParty>
 
@@ -67,6 +70,9 @@
               <cbc:ID>VAT</cbc:ID>
             </cac:TaxScheme>
           </cac:PartyTaxScheme>
+          <cac:PartyLegalEntity>
+            <cbc:RegistrationName>Buyer name</cbc:RegistrationName>
+          </cac:PartyLegalEntity>
         </cac:Party>
       </cac:AccountingCustomerParty>
 
