@@ -54,6 +54,10 @@ to build the solution.
 
 # News and noteworthy
 
+v1.2.1 - 2026-07-23
+* Synchronized Schematron and example files with the updated OM TDD 2026-Q2-v1.0.1 release
+* Schematron rule `ibr-tdd-27` now requires the ReportedDocument `cbc:UUID` (btom-07) to be a valid UUID version 5
+
 v1.2.0 - 2026-07-22
 * Synchronized XSD, Schematron and example files with the OM TDD 2026-Q2-v1.0.1 release (2026-07-17)
 * Added the new mandatory Schematron rules `ibr-tdd-61`/`ibr-tdd-62` (Seller name) and `ibr-tdd-63`/`ibr-tdd-64` (Buyer name)

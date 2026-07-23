@@ -81,7 +81,7 @@ public final class PeppolOMTDD10BuilderTest
                                                                                       .customizationID ("urn:peppol:pint:billing-1@om-1")
                                                                                       .profileID ("urn:peppol:bis:billing")
                                                                                       .id ("invoice-1")
-                                                                                      .uuid ("19e2c9a3-b000-4fb0-9bd5-a9c4ebda2358")
+                                                                                      .uuid ("02de16f6-2395-59ba-89c4-6de86caf661a")
                                                                                       .issueDate (PDTFactory.createLocalDate (2026,
                                                                                                                               Month.APRIL,
                                                                                                                               28))
@@ -143,7 +143,7 @@ public final class PeppolOMTDD10BuilderTest
                                                                                       .customizationID ("urn:peppol:pint:billing-1@om-1")
                                                                                       .profileID ("urn:peppol:bis:billing")
                                                                                       .id ("invoice-1")
-                                                                                      .uuid ("19e2c9a3-b000-4fb0-9bd5-a9c4ebda2358")
+                                                                                      .uuid ("02de16f6-2395-59ba-89c4-6de86caf661a")
                                                                                       .issueDate (PDTFactory.createLocalDate (2026,
                                                                                                                               Month.APRIL,
                                                                                                                               28))
