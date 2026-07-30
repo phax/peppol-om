@@ -54,6 +54,10 @@ to build the solution.
 
 # News and noteworthy
 
+v1.2.2 - 2026-07-30
+* Synchronized Schematron and example files with the updated OM TDD v1.0.1 release (2026-07-29) from https://docs.peppol.eu/poac/om/om-tdd/
+* Schematron rule `ibr-tdd-42` now allows the Seller tax identifier to be omitted for import of goods, import of service RCM and profit margin self invoices
+
 v1.2.1 - 2026-07-23
 * Synchronized Schematron and example files with the updated OM TDD 2026-Q2-v1.0.1 release
 * Schematron rule `ibr-tdd-27` now requires the ReportedDocument `cbc:UUID` (btom-07) to be a valid UUID version 5

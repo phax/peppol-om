@@ -5,7 +5,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Project Overview
 
 A Java library implementing the Peppol Oman (OM) Tax Data Document (TDD) specification. The backing specs are:
-- TDD OM: https://test-docs.peppol.eu/pint/pint-om/om-tdd/ (and `2026-Q2-MR/om-tdd/` for the latest MR)
+- TDD OM: https://docs.peppol.eu/poac/om/om-tdd/ (production releases; MR snapshots at https://test-docs.peppol.eu/pint/pint-om/om-tdd/)
 - PINT OM: https://test-docs.peppol.eu/pint/pint-om/
 
 The implementation mirrors the sibling `peppol-uae` and `peppol-sk` projects under `~/dev/git/`. When in doubt about conventions or patterns, consult those.
@@ -75,7 +75,7 @@ When pulling a new release from the OpenPeppol docs site:
 2. Replace `peppol-om-tdd/src/main/resources/external/schematron/peppol-om-tdd-1.0.0.sch` from `trn-tdd/schematron/peppol-om-tdd.sch`
 3. Sync example XMLs under `peppol-om-testfiles/src/main/resources/external/tdd/10/good/` and update the file list in `PeppolOMTestFiles.getAllGoodTDD10Files`
 4. Compare codelists in `trn-tdd/codelist/TDD-{dtc,ds,rr}.gc` against the enums in `peppol-om-tdd/.../codelist/`
-5. The OpenPeppol release does **not** ship an XSD — the project's XSD is hand-maintained and uses `urn:peppol:schema:om-taxdata:1.0`
+5. Since the 1.0.1 release (2026-07-29) the OpenPeppol release ships an XSD at `trn-tdd/xsd/` (derived from this project's hand-maintained one, namespace `urn:peppol:schema:om-taxdata:1.0`). Compare it against `peppol-om-tdd-datatypes/src/main/resources/external/schemas/` — but keep the project's version, which uses catalog-based imports (no `schemaLocation` URLs) and richer documentation
 
 ## Code Conventions
 
