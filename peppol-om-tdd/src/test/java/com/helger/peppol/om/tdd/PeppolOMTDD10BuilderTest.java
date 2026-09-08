@@ -47,6 +47,13 @@ import com.helger.schematron.svrl.jaxb.FiredRule;
 import com.helger.schematron.svrl.jaxb.SchematronOutputType;
 import com.helger.xml.serialize.read.DOMReader;
 
+import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_21.CustomerPartyType;
+import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_21.PartyLegalEntityType;
+import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_21.PartyType;
+import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_21.SupplierPartyType;
+import oasis.names.specification.ubl.schema.xsd.creditnote_21.CreditNoteType;
+import oasis.names.specification.ubl.schema.xsd.invoice_21.InvoiceType;
+
 /**
  * Test class for class {@link PeppolOMTDD10Builder}.
  *
@@ -55,6 +62,47 @@ import com.helger.xml.serialize.read.DOMReader;
 public final class PeppolOMTDD10BuilderTest
 {
   private static final Logger LOGGER = LoggerFactory.getLogger (PeppolOMTDD10BuilderTest.class);
+
+  private static PartyType _createPartyWithName (final String sName)
+  {
+    final PartyLegalEntityType aPLE = new PartyLegalEntityType ();
+    aPLE.setRegistrationName (sName);
+    final PartyType ret = new PartyType ();
+    ret.addPartyLegalEntity (aPLE);
+    return ret;
+  }
+
+  @Test
+  public void testInitFromInvoiceCopiesPartyNames ()
+  {
+    final InvoiceType aInvoice = new InvoiceType ();
+    final SupplierPartyType aSupplier = new SupplierPartyType ();
+    aSupplier.setParty (_createPartyWithName ("Seller name"));
+    aInvoice.setAccountingSupplierParty (aSupplier);
+    final CustomerPartyType aCustomer = new CustomerPartyType ();
+    aCustomer.setParty (_createPartyWithName ("Buyer name"));
+    aInvoice.setAccountingCustomerParty (aCustomer);
+
+    final PeppolOMTDD10ReportedTransactionBuilder aBuilder = new PeppolOMTDD10ReportedTransactionBuilder ().initFromInvoice (aInvoice);
+    assertEquals ("Seller name", aBuilder.sellerName ());
+    assertEquals ("Buyer name", aBuilder.buyerName ());
+  }
+
+  @Test
+  public void testInitFromCreditNoteCopiesPartyNames ()
+  {
+    final CreditNoteType aCreditNote = new CreditNoteType ();
+    final SupplierPartyType aSupplier = new SupplierPartyType ();
+    aSupplier.setParty (_createPartyWithName ("Seller name"));
+    aCreditNote.setAccountingSupplierParty (aSupplier);
+    final CustomerPartyType aCustomer = new CustomerPartyType ();
+    aCustomer.setParty (_createPartyWithName ("Buyer name"));
+    aCreditNote.setAccountingCustomerParty (aCustomer);
+
+    final PeppolOMTDD10ReportedTransactionBuilder aBuilder = new PeppolOMTDD10ReportedTransactionBuilder ().initFromCreditNote (aCreditNote);
+    assertEquals ("Seller name", aBuilder.sellerName ());
+    assertEquals ("Buyer name", aBuilder.buyerName ());
+  }
 
   @Test
   public void testBasicMinimal () throws Exception
@@ -87,8 +135,10 @@ public final class PeppolOMTDD10BuilderTest
                                                                                                                               28))
                                                                                       .documentTypeCode ("380")
                                                                                       .documentCurrencyCode ("OMR")
+                                                                                      .sellerName ("Seller name")
                                                                                       .sellerTaxID ("123456789")
                                                                                       .sellerTaxSchemeID ("VAT")
+                                                                                      .buyerName ("Buyer name")
                                                                                       .buyerID ("11223344")
                                                                                       .buyerIDSchemeID ("OM:TIN")
                                                                                       .buyerTaxID ("987654321")
@@ -99,6 +149,20 @@ public final class PeppolOMTDD10BuilderTest
                                                                                                                              "</Invoice>")))
                                                         .build ();
     assertNotNull (aTDD);
+    assertEquals ("Seller name",
+                  aTDD.getReportedTransactionAtIndex (0)
+                      .getReportedDocument ()
+                      .getAccountingSupplierParty ()
+                      .getParty ()
+                      .getPartyLegalEntityAtIndex (0)
+                      .getRegistrationNameValue ());
+    assertEquals ("Buyer name",
+                  aTDD.getReportedTransactionAtIndex (0)
+                      .getReportedDocument ()
+                      .getAccountingCustomerParty ()
+                      .getParty ()
+                      .getPartyLegalEntityAtIndex (0)
+                      .getRegistrationNameValue ());
 
     // Serialize
     final String sXML = new PeppolOMTDD10Marshaller ().setFormattedOutput (true).getAsString (aTDD);
@@ -154,8 +218,10 @@ public final class PeppolOMTDD10BuilderTest
                                                                                       .documentTypeCode ("380")
                                                                                       .documentCurrencyCode ("OMR")
                                                                                       .taxCurrencyCode ("EUR")
+                                                                                      .sellerName ("Seller name")
                                                                                       .sellerTaxID ("123456789")
                                                                                       .sellerTaxSchemeID ("VAT")
+                                                                                      .buyerName ("Buyer name")
                                                                                       .buyerID ("11223344")
                                                                                       .buyerIDSchemeID ("OM:TIN")
                                                                                       .buyerTaxID ("987654321")
