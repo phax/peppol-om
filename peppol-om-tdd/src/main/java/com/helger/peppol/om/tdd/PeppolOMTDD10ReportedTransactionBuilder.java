@@ -802,7 +802,7 @@ public class PeppolOMTDD10ReportedTransactionBuilder implements IBuilder <Report
     {
       final QName aQName = XMLHelper.getQName (m_aSourceDocument);
       if (!aQName.equals (UBL21Marshaller.invoice ().getRootElementQName ()) &&
-        !aQName.equals (UBL21Marshaller.creditNote ().getRootElementQName ()))
+          !aQName.equals (UBL21Marshaller.creditNote ().getRootElementQName ()))
       {
         aCondLog.error (sErrorPrefix + "SourceDocument must be a UBL 2.1 Invoice or CreditNote");
         nErrs++;
