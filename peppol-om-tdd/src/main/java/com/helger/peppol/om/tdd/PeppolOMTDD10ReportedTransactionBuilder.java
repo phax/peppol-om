@@ -21,6 +21,7 @@ import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.time.OffsetTime;
 import java.util.Locale;
+import java.util.UUID;
 
 import javax.xml.namespace.QName;
 
@@ -165,7 +166,9 @@ public class PeppolOMTDD10ReportedTransactionBuilder implements IBuilder <Report
   }
 
   /**
-   * Set all fields except the TransportHeaderID from the provided UBL 2.1 Invoice
+   * Set all fields except the TransportHeaderID from the provided UBL 2.1 Invoice.
+   * If the Invoice contains no UUID, it is calculated according to
+   * {@link PeppolOMInvoiceUUIDHelper}.
    *
    * @param aInv
    *        The Invoice to read from. May not be <code>null</code>.
@@ -179,7 +182,14 @@ public class PeppolOMTDD10ReportedTransactionBuilder implements IBuilder <Report
     customizationID (aInv.getCustomizationIDValue ());
     profileID (aInv.getProfileIDValue ());
     id (aInv.getIDValue ());
-    uuid (aInv.getUUIDValue ());
+    if (StringHelper.isNotEmpty (aInv.getUUIDValue ()))
+      uuid (aInv.getUUIDValue ());
+    else
+    {
+      // C3 can determine the Invoice UUID if it is not provided by C2
+      final UUID aUUID = PeppolOMInvoiceUUIDHelper.getInvoiceUUID (aInv);
+      uuid (aUUID == null ? null : aUUID.toString ());
+    }
     issueDate (aInv.getIssueDateValueLocal ());
     issueTime (aInv.getIssueTimeValue ());
     documentTypeCode (aInv.getInvoiceTypeCodeValue ());
@@ -257,7 +267,9 @@ public class PeppolOMTDD10ReportedTransactionBuilder implements IBuilder <Report
   }
 
   /**
-   * Set all fields except the TransportHeaderID from the provided UBL 2.1 CreditNote
+   * Set all fields except the TransportHeaderID from the provided UBL 2.1 CreditNote.
+   * If the CreditNote contains no UUID, it is calculated according to
+   * {@link PeppolOMInvoiceUUIDHelper}.
    *
    * @param aCN
    *        The CreditNote to read from. May not be <code>null</code>.
@@ -271,7 +283,14 @@ public class PeppolOMTDD10ReportedTransactionBuilder implements IBuilder <Report
     customizationID (aCN.getCustomizationIDValue ());
     profileID (aCN.getProfileIDValue ());
     id (aCN.getIDValue ());
-    uuid (aCN.getUUIDValue ());
+    if (StringHelper.isNotEmpty (aCN.getUUIDValue ()))
+      uuid (aCN.getUUIDValue ());
+    else
+    {
+      // C3 can determine the Invoice UUID if it is not provided by C2
+      final UUID aUUID = PeppolOMInvoiceUUIDHelper.getInvoiceUUID (aCN);
+      uuid (aUUID == null ? null : aUUID.toString ());
+    }
     issueDate (aCN.getIssueDateValueLocal ());
     issueTime (aCN.getIssueTimeValue ());
     documentTypeCode (aCN.getCreditNoteTypeCodeValue ());

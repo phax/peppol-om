@@ -54,6 +54,11 @@ to build the solution.
 
 # News and noteworthy
 
+v1.2.3 - work in progress
+* Added `PeppolOMInvoiceUUIDHelper` to calculate the Invoice UUID (BTOM-002) as UUID v5 according to the OM Solution Architecture v1.0.3, section 10.2.3
+* Added the constant `CPeppolOMTDD.PEPPOL_OM_NAMESPACE` with the fixed UUID v5 namespace
+* `PeppolOMTDD10ReportedTransactionBuilder.initFromInvoice` and `initFromCreditNote` now calculate the Invoice UUID if the source document has none
+
 v1.2.2 - 2026-07-30
 * Synchronized Schematron and example files with the updated OM TDD v1.0.1 release (2026-07-29) from https://docs.peppol.eu/poac/om/om-tdd/
 * Schematron rule `ibr-tdd-42` now allows the Seller tax identifier to be omitted for import of goods, import of service RCM and profit margin self invoices

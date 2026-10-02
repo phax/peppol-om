@@ -16,6 +16,8 @@
  */
 package com.helger.peppol.om.tdd.jaxb;
 
+import java.util.UUID;
+
 import org.jspecify.annotations.NonNull;
 
 import com.helger.annotation.concurrent.Immutable;
@@ -48,6 +50,12 @@ public final class CPeppolOMTDD
 
   /** Namespace URI for Peppol OM TDD XSD 1.0 */
   public static final String TDD_XSD_1_0_NS = "urn:peppol:schema:om-taxdata:1.0";
+
+  /**
+   * The fixed UUID v5 namespace to be used for the calculation of the Invoice UUID (BTOM-002) and
+   * the Seller UUID (BTOM-004). See OM Solution Architecture v1.0.3, section 10.2.3.
+   */
+  public static final UUID PEPPOL_OM_NAMESPACE = UUID.fromString ("e0bc4ac8-b025-46e5-a76d-0c893fc3027e");
 
   @PresentForCodeCoverage
   private static final CPeppolOMTDD INSTANCE = new CPeppolOMTDD ();
