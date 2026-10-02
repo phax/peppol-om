@@ -372,6 +372,12 @@ public class PeppolOMTDD10ReportedTransactionBuilder implements IBuilder <Report
     return m_sTransportHeaderID;
   }
 
+  /**
+   * @param s
+   *        The SBDH InstanceIdentifier (UUID version 4) of the transmission of the reported
+   *        document. See OM Solution Architecture v1.0.3, sections 10.2.3 and 11.1.
+   * @return this for chaining
+   */
   @NonNull
   public PeppolOMTDD10ReportedTransactionBuilder transportHeaderID (@Nullable final String s)
   {
@@ -483,6 +489,13 @@ public class PeppolOMTDD10ReportedTransactionBuilder implements IBuilder <Report
     return m_sUUID;
   }
 
+  /**
+   * @param s
+   *        The Invoice UUID (BTOM-002) of the reported document. This is a UUID version 5. See OM
+   *        Solution Architecture v1.0.3, section 10.2.3.
+   * @return this for chaining
+   * @see PeppolOMInvoiceUUIDHelper
+   */
   @NonNull
   public PeppolOMTDD10ReportedTransactionBuilder uuid (@Nullable final String s)
   {

@@ -24,7 +24,8 @@ import com.helger.base.id.IHasID;
 import com.helger.base.lang.EnumHelper;
 
 /**
- * OM TDD Document Type Code.
+ * OM TDD Document Type Code (TDT-006). How the OTA (C6) consolidates Submit, Resubmit and
+ * Disregard TDDs is described in the OM Solution Architecture v1.0.3, section 8.
  *
  * @author Philip Helger
  */

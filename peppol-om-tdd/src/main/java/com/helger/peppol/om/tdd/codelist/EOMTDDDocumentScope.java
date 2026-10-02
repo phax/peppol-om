@@ -24,7 +24,8 @@ import com.helger.base.id.IHasID;
 import com.helger.base.lang.EnumHelper;
 
 /**
- * OM TDD Document Scope.
+ * OM TDD Document Scope. The domestic and international (Peppol and non-Peppol) scenarios are
+ * described in the OM Solution Architecture v1.0.3, sections 5.6 (C2) and 6.6 (C3).
  *
  * @author Philip Helger
  */

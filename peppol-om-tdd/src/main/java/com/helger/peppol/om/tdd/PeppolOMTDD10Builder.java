@@ -58,7 +58,14 @@ import oasis.names.specification.ubl.schema.xsd.commonbasiccomponents_21.UUIDTyp
  */
 public class PeppolOMTDD10Builder implements IBuilder <TaxDataType>
 {
+  /**
+   * The TDD customization ID, as contained in the TDD Document Type Identifier. See OM Solution
+   * Architecture v1.0.3, section 10.2.2.
+   */
   public static final String DEFAULT_CUSTOMIZATION_ID = "urn:peppol:taxdata:om-1";
+  /**
+   * The TDD Process Identifier. See OM Solution Architecture v1.0.3, section 10.1.
+   */
   public static final String DEFAULT_PROFILE_ID = "urn:peppol:taxreporting";
 
   private static final Logger LOGGER = LoggerFactory.getLogger (PeppolOMTDD10Builder.class);
@@ -115,6 +122,13 @@ public class PeppolOMTDD10Builder implements IBuilder <TaxDataType>
     return m_sUUID;
   }
 
+  /**
+   * @param s
+   *        The TDD UUID (TDT-003). Must be a UUID version 4, generated locally by C2 or C3. See OM
+   *        Solution Architecture v1.0.3, section 10.2.3.
+   * @return this for chaining
+   * @see #randomUUID()
+   */
   @NonNull
   public PeppolOMTDD10Builder uuid (@Nullable final String s)
   {
@@ -122,6 +136,11 @@ public class PeppolOMTDD10Builder implements IBuilder <TaxDataType>
     return this;
   }
 
+  /**
+   * Set a new random UUID version 4 as the TDD UUID (TDT-003).
+   *
+   * @return this for chaining
+   */
   @NonNull
   public PeppolOMTDD10Builder randomUUID ()
   {
@@ -228,7 +247,8 @@ public class PeppolOMTDD10Builder implements IBuilder <TaxDataType>
 
   /**
    * @param a
-   *        Peppol Participant ID of C1/C4 of the business document.
+   *        Peppol Participant ID of C1/C4 of the business document. See OM Solution Architecture
+   *        v1.0.3, section 10.3.1.
    * @return this for chaining
    */
   @NonNull
@@ -246,7 +266,8 @@ public class PeppolOMTDD10Builder implements IBuilder <TaxDataType>
 
   /**
    * @param a
-   *        Peppol Participant ID of C5 of the TDD.
+   *        Peppol Participant ID of C5 of the TDD. Must use the SPIS scheme (0242). See OM Solution
+   *        Architecture v1.0.3, section 10.3.3.
    * @return this for chaining
    */
   @NonNull
@@ -264,7 +285,8 @@ public class PeppolOMTDD10Builder implements IBuilder <TaxDataType>
 
   /**
    * @param a
-   *        Peppol Participant ID of C2/C3 of the business document. Must use the SPIS scheme.
+   *        Peppol Participant ID of C2/C3 of the business document. Must use the SPIS scheme (0242).
+   *        See OM Solution Architecture v1.0.3, section 10.3.3.
    * @return this for chaining
    */
   @NonNull
@@ -396,6 +418,7 @@ public class PeppolOMTDD10Builder implements IBuilder <TaxDataType>
         }
         else
         {
+          // C5 is a Service Provider - see OM Solution Architecture v1.0.3, section 10.3.3
           final String [] aParts = StringHelper.getExplodedArray (':', m_aReceivingParty.getValue (), 2);
           if (!"0242".equals (aParts[0]))
           {
@@ -435,6 +458,7 @@ public class PeppolOMTDD10Builder implements IBuilder <TaxDataType>
         }
         else
         {
+          // C2/C3 are Service Providers - see OM Solution Architecture v1.0.3, section 10.3.3
           final String [] aParts = StringHelper.getExplodedArray (':', m_aReportersRepresentative.getValue (), 2);
           if (!"0242".equals (aParts[0]))
           {

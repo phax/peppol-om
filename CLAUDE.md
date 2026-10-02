@@ -7,6 +7,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 A Java library implementing the Peppol Oman (OM) Tax Data Document (TDD) specification. The backing specs are:
 - TDD OM: https://docs.peppol.eu/poac/om/om-tdd/ (production releases; MR snapshots at https://test-docs.peppol.eu/pint/pint-om/om-tdd/)
 - PINT OM: https://test-docs.peppol.eu/pint/pint-om/
+- OM Solution Architecture: `docs/Oman - Solution Architecture v1.0.3.pdf`, with a Markdown conversion next to it (`.md`) for searching. The PDF is authoritative. Code comments reference it as "OM Solution Architecture v1.0.3, section x.y"
 
 The implementation mirrors the sibling `peppol-uae` and `peppol-sk` projects under `~/dev/git/`. When in doubt about conventions or patterns, consult those.
 

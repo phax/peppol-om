@@ -24,7 +24,8 @@ import com.helger.base.id.IHasID;
 import com.helger.base.lang.EnumHelper;
 
 /**
- * OM TDD Reporter Role.
+ * OM TDD Reporter Role. The TDD is sent by C2 on behalf of the seller (see OM Solution Architecture
+ * v1.0.3, section 5) or by C3 on behalf of the buyer (see section 6).
  *
  * @author Philip Helger
  */
