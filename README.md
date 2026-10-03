@@ -18,6 +18,7 @@ The minimum requirement is Java 17.
 The backing specifications are:
 * TDD OM: https://docs.peppol.eu/poac/om/om-tdd/
 * PINT OM: https://docs.peppol.eu/poac/om/pint-om/
+* Solution architecture: https://openpeppol.atlassian.net/wiki/spaces/PO/pages/5245304839/Peppol+Oman+-+architecture
 
 # Submodules
 
