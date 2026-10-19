@@ -55,6 +55,9 @@ to build the solution.
 
 # News and noteworthy
 
+v1.2.4 - work in progress
+* Added the overload `isEveryRequiredFieldSet (ErrorList)` to `PeppolOMTDD10Builder` and to all sub-builders. It collects the reasons why a builder is incomplete in an `ErrorList` instead of only logging them, so that callers can pass them on
+
 v1.2.3 - 2026-10-02
 * Added `PeppolOMInvoiceUUIDHelper` to calculate the Invoice UUID (BTOM-002) as UUID v5 according to the OM Solution Architecture v1.0.3, section 10.2.3
 * Added the constant `CPeppolOMTDD.PEPPOL_OM_NAMESPACE` with the fixed UUID v5 namespace

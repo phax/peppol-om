@@ -23,6 +23,7 @@ import java.time.OffsetTime;
 import java.util.Locale;
 import java.util.UUID;
 
+import java.util.function.Consumer;
 import javax.xml.namespace.QName;
 
 import org.jspecify.annotations.NonNull;
@@ -41,6 +42,8 @@ import com.helger.collection.commons.CommonsArrayList;
 import com.helger.collection.commons.ICommonsList;
 import com.helger.datetime.helper.PDTFactory;
 import com.helger.datetime.xml.XMLOffsetTime;
+import com.helger.diagnostics.error.SingleError;
+import com.helger.diagnostics.error.list.ErrorList;
 import com.helger.peppol.om.tdd.v10.CustomContentType;
 import com.helger.peppol.om.tdd.v10.MonetaryTotalType;
 import com.helger.peppol.om.tdd.v10.ReferencedDocumentTypeCodeType;
@@ -720,10 +723,9 @@ public class PeppolOMTDD10ReportedTransactionBuilder implements IBuilder <Report
     return this;
   }
 
-  public boolean isEveryRequiredFieldSet (final boolean bDoLogOnError)
+  private boolean _isEveryRequiredFieldSet (@NonNull final Consumer <String> aErrorHandler, @NonNull final Consumer <String> aWarnHandler)
   {
     int nErrs = 0;
-    final ConditionalLogger aCondLog = new ConditionalLogger (LOGGER, bDoLogOnError);
     final String sErrorPrefix = "Error in Peppol OM TDD 1.0 ReportedTransaction builder: ";
     final String sWarnPrefix = "Warning in Peppol OM TDD 1.0 ReportedTransaction builder: ";
 
@@ -732,60 +734,60 @@ public class PeppolOMTDD10ReportedTransactionBuilder implements IBuilder <Report
     // ReportedTransaction received-on date/time (tdom-04 / tdom-05, ibr-tdd-59 / ibr-tdd-60)
     if (m_aReceivedDate == null)
     {
-      aCondLog.error (sErrorPrefix + "ReceivedDate is missing");
+      aErrorHandler.accept (sErrorPrefix + "ReceivedDate is missing");
       nErrs++;
     }
     if (m_aReceivedTime == null)
     {
-      aCondLog.error (sErrorPrefix + "ReceivedTime is missing");
+      aErrorHandler.accept (sErrorPrefix + "ReceivedTime is missing");
       nErrs++;
     }
 
     // Check all ReportedDocument fields
     if (StringHelper.isEmpty (m_sCustomizationID))
     {
-      aCondLog.error (sErrorPrefix + "CustomizationID is missing");
+      aErrorHandler.accept (sErrorPrefix + "CustomizationID is missing");
       nErrs++;
     }
     if (StringHelper.isEmpty (m_sProfileID))
     {
-      aCondLog.error (sErrorPrefix + "ProfileID is missing");
+      aErrorHandler.accept (sErrorPrefix + "ProfileID is missing");
       nErrs++;
     }
     if (StringHelper.isEmpty (m_sID))
     {
-      aCondLog.error (sErrorPrefix + "ID is missing");
+      aErrorHandler.accept (sErrorPrefix + "ID is missing");
       nErrs++;
     }
     if (StringHelper.isEmpty (m_sUUID))
     {
-      aCondLog.error (sErrorPrefix + "UUID is missing");
+      aErrorHandler.accept (sErrorPrefix + "UUID is missing");
       nErrs++;
     }
     if (m_aIssueDate == null)
     {
-      aCondLog.error (sErrorPrefix + "IssueDate is missing");
+      aErrorHandler.accept (sErrorPrefix + "IssueDate is missing");
       nErrs++;
     }
     // IssueTime is optional
     if (StringHelper.isEmpty (m_sDocumentTypeCode))
     {
-      aCondLog.error (sErrorPrefix + "DocumentTypeCode is missing");
+      aErrorHandler.accept (sErrorPrefix + "DocumentTypeCode is missing");
       nErrs++;
     }
     if (StringHelper.isEmpty (m_sDocumentCurrencyCode))
     {
-      aCondLog.error (sErrorPrefix + "DocumentCurrencyCode is missing");
+      aErrorHandler.accept (sErrorPrefix + "DocumentCurrencyCode is missing");
       nErrs++;
     }
     if (StringHelper.isEmpty (m_sSellerTaxID))
     {
-      aCondLog.error (sErrorPrefix + "SellerTaxID is missing");
+      aErrorHandler.accept (sErrorPrefix + "SellerTaxID is missing");
       nErrs++;
     }
     if (StringHelper.isEmpty (m_sSellerTaxSchemeID))
     {
-      aCondLog.error (sErrorPrefix + "SellerTaxSchemeID is missing");
+      aErrorHandler.accept (sErrorPrefix + "SellerTaxSchemeID is missing");
       nErrs++;
     }
     if (StringHelper.isNotEmpty (m_sBuyerIDSchemeID))
@@ -793,20 +795,20 @@ public class PeppolOMTDD10ReportedTransactionBuilder implements IBuilder <Report
       if (StringHelper.isEmpty (m_sBuyerID))
       {
         // Warning only
-        aCondLog.warn (sWarnPrefix + "BuyerIDSchemeID can only be used if BuyerID is also present");
+        aWarnHandler.accept (sWarnPrefix + "BuyerIDSchemeID can only be used if BuyerID is also present");
       }
     }
     if (m_aTaxTotalAmountDocumentCurrency == null)
     {
-      aCondLog.error (sErrorPrefix + "TaxTotalAmountDocumentCurrency is missing");
+      aErrorHandler.accept (sErrorPrefix + "TaxTotalAmountDocumentCurrency is missing");
       nErrs++;
     }
     if (m_aTaxTotalAmountTaxCurrency != null)
     {
       if (StringHelper.isEmpty (m_sTaxCurrencyCode))
       {
-        aCondLog.error (sErrorPrefix +
-                        "If TaxTotalAmountTaxCurrency is provided, TaxCurrencyCode must also be provided");
+        aErrorHandler.accept (sErrorPrefix +
+                              "If TaxTotalAmountTaxCurrency is provided, TaxCurrencyCode must also be provided");
         nErrs++;
       }
     }
@@ -814,20 +816,20 @@ public class PeppolOMTDD10ReportedTransactionBuilder implements IBuilder <Report
     {
       if (StringHelper.isNotEmpty (m_sTaxCurrencyCode))
       {
-        aCondLog.error (sErrorPrefix +
-                        "If TaxCurrencyCode is provided, TaxTotalAmountTaxCurrency must also be provided");
+        aErrorHandler.accept (sErrorPrefix +
+                              "If TaxCurrencyCode is provided, TaxTotalAmountTaxCurrency must also be provided");
         nErrs++;
       }
     }
     if (m_aTaxExclusiveTotalAmount == null)
     {
-      aCondLog.error (sErrorPrefix + "TaxExclusiveTotalAmount is missing");
+      aErrorHandler.accept (sErrorPrefix + "TaxExclusiveTotalAmount is missing");
       nErrs++;
     }
 
     if (m_aSourceDocument == null)
     {
-      aCondLog.error (sErrorPrefix + "SourceDocument is missing");
+      aErrorHandler.accept (sErrorPrefix + "SourceDocument is missing");
       nErrs++;
     }
     else
@@ -836,12 +838,25 @@ public class PeppolOMTDD10ReportedTransactionBuilder implements IBuilder <Report
       if (!aQName.equals (UBL21Marshaller.invoice ().getRootElementQName ()) &&
           !aQName.equals (UBL21Marshaller.creditNote ().getRootElementQName ()))
       {
-        aCondLog.error (sErrorPrefix + "SourceDocument must be a UBL 2.1 Invoice or CreditNote");
+        aErrorHandler.accept (sErrorPrefix + "SourceDocument must be a UBL 2.1 Invoice or CreditNote");
         nErrs++;
       }
     }
 
     return nErrs == 0;
+  }
+
+  public boolean isEveryRequiredFieldSet (final boolean bDoLogOnError)
+  {
+    final ConditionalLogger aCondLog = new ConditionalLogger (LOGGER, bDoLogOnError);
+    return _isEveryRequiredFieldSet (sError -> aCondLog.error (sError), sWarn -> aCondLog.warn (sWarn));
+  }
+
+  public boolean isEveryRequiredFieldSet (@NonNull final ErrorList aErrorList)
+  {
+    ValueEnforcer.notNull (aErrorList, "ErrorList");
+    return _isEveryRequiredFieldSet (sError -> aErrorList.add (SingleError.builderError ().errorText (sError).build ()),
+                                     sWarn -> aErrorList.add (SingleError.builderWarn ().errorText (sWarn).build ()));
   }
 
   @Nullable
