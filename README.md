@@ -56,7 +56,10 @@ to build the solution.
 # News and noteworthy
 
 v1.2.4 - work in progress
-* Added the overload `isEveryRequiredFieldSet (ErrorList)` to `PeppolOMTDD10Builder` and to all sub-builders. It collects the reasons why a builder is incomplete in an `ErrorList` instead of only logging them, so that callers can pass them on
+* Updated to ph-commons 12.5.2
+* Added `logHandler (ILogHandler)` to `PeppolOMTDD10Builder` and all sub-builders. It receives the message of each missing or invalid required field (as error, warnings as warnings) when calling `build ()`; the default handler logs to the logger of the builder class. Use `ILogHandler.createForConsumer`, `ILogHandler.createForBiConsumer` or `ErrorListLogHandler` to redirect the messages, and `ILogHandler.createNoOp ()` to discard them. Call it first, because it is passed on to sub-builders created via lambda afterwards
+* Added `isEveryRequiredFieldSet (ErrorList)` which collects the messages in an `ErrorList`, independent of the log handler
+* Removed the public `isEveryRequiredFieldSet ()` and `isEveryRequiredFieldSet (boolean)` methods; use `isEveryRequiredFieldSet (ErrorList)` or `build ()` instead
 
 v1.2.3 - 2026-10-02
 * Added `PeppolOMInvoiceUUIDHelper` to calculate the Invoice UUID (BTOM-002) as UUID v5 according to the OM Solution Architecture v1.0.3, section 10.2.3
