@@ -54,6 +54,7 @@ import com.helger.xml.XMLHelper;
 
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_21.CustomerPartyType;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_21.PartyIdentificationType;
+import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_21.PartyLegalEntityType;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_21.PartyTaxSchemeType;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_21.PartyType;
 import oasis.names.specification.ubl.schema.xsd.commonaggregatecomponents_21.SupplierPartyType;
@@ -128,8 +129,10 @@ public class PeppolOMTDD10ReportedTransactionBuilder implements IBuilder <Report
   private String m_sDocumentTypeCode;
   private String m_sDocumentCurrencyCode;
   private String m_sTaxCurrencyCode;
+  private String m_sSellerName;
   private String m_sSellerTaxID;
   private String m_sSellerTaxSchemeID;
+  private String m_sBuyerName;
   private String m_sBuyerID;
   private String m_sBuyerIDSchemeID;
   private String m_sBuyerTaxID;
@@ -203,13 +206,19 @@ public class PeppolOMTDD10ReportedTransactionBuilder implements IBuilder <Report
     if (aSupplier != null)
     {
       final PartyType aParty = aSupplier.getParty ();
-      if (aParty != null && aParty.hasPartyTaxSchemeEntries ())
+      if (aParty != null)
       {
-        final PartyTaxSchemeType aPTS = aParty.getPartyTaxSchemeAtIndex (0);
-        sellerTaxID (aPTS.getCompanyIDValue ());
-        final TaxSchemeType aTS = aPTS.getTaxScheme ();
-        if (aTS != null)
-          sellerTaxSchemeID (aTS.getIDValue ());
+        if (aParty.hasPartyLegalEntityEntries ())
+          sellerName (aParty.getPartyLegalEntityAtIndex (0).getRegistrationNameValue ());
+
+        if (aParty.hasPartyTaxSchemeEntries ())
+        {
+          final PartyTaxSchemeType aPTS = aParty.getPartyTaxSchemeAtIndex (0);
+          sellerTaxID (aPTS.getCompanyIDValue ());
+          final TaxSchemeType aTS = aPTS.getTaxScheme ();
+          if (aTS != null)
+            sellerTaxSchemeID (aTS.getIDValue ());
+        }
       }
     }
 
@@ -219,6 +228,9 @@ public class PeppolOMTDD10ReportedTransactionBuilder implements IBuilder <Report
       final PartyType aParty = aCustomer.getParty ();
       if (aParty != null)
       {
+        if (aParty.hasPartyLegalEntityEntries ())
+          buyerName (aParty.getPartyLegalEntityAtIndex (0).getRegistrationNameValue ());
+
         if (aParty.hasPartyIdentificationEntries ())
         {
           final PartyIdentificationType aPID = aParty.getPartyIdentificationAtIndex (0);
@@ -304,13 +316,19 @@ public class PeppolOMTDD10ReportedTransactionBuilder implements IBuilder <Report
     if (aSupplier != null)
     {
       final PartyType aParty = aSupplier.getParty ();
-      if (aParty != null && aParty.hasPartyTaxSchemeEntries ())
+      if (aParty != null)
       {
-        final PartyTaxSchemeType aPTS = aParty.getPartyTaxSchemeAtIndex (0);
-        sellerTaxID (aPTS.getCompanyIDValue ());
-        final TaxSchemeType aTS = aPTS.getTaxScheme ();
-        if (aTS != null)
-          sellerTaxSchemeID (aTS.getIDValue ());
+        if (aParty.hasPartyLegalEntityEntries ())
+          sellerName (aParty.getPartyLegalEntityAtIndex (0).getRegistrationNameValue ());
+
+        if (aParty.hasPartyTaxSchemeEntries ())
+        {
+          final PartyTaxSchemeType aPTS = aParty.getPartyTaxSchemeAtIndex (0);
+          sellerTaxID (aPTS.getCompanyIDValue ());
+          final TaxSchemeType aTS = aPTS.getTaxScheme ();
+          if (aTS != null)
+            sellerTaxSchemeID (aTS.getIDValue ());
+        }
       }
     }
 
@@ -320,6 +338,9 @@ public class PeppolOMTDD10ReportedTransactionBuilder implements IBuilder <Report
       final PartyType aParty = aCustomer.getParty ();
       if (aParty != null)
       {
+        if (aParty.hasPartyLegalEntityEntries ())
+          buyerName (aParty.getPartyLegalEntityAtIndex (0).getRegistrationNameValue ());
+
         if (aParty.hasPartyIdentificationEntries ())
         {
           final PartyIdentificationType aPID = aParty.getPartyIdentificationAtIndex (0);
@@ -587,6 +608,19 @@ public class PeppolOMTDD10ReportedTransactionBuilder implements IBuilder <Report
   }
 
   @Nullable
+  public String sellerName ()
+  {
+    return m_sSellerName;
+  }
+
+  @NonNull
+  public PeppolOMTDD10ReportedTransactionBuilder sellerName (@Nullable final String s)
+  {
+    m_sSellerName = s;
+    return this;
+  }
+
+  @Nullable
   public String sellerTaxID ()
   {
     return m_sSellerTaxID;
@@ -609,6 +643,19 @@ public class PeppolOMTDD10ReportedTransactionBuilder implements IBuilder <Report
   public PeppolOMTDD10ReportedTransactionBuilder sellerTaxSchemeID (@Nullable final String s)
   {
     m_sSellerTaxSchemeID = s;
+    return this;
+  }
+
+  @Nullable
+  public String buyerName ()
+  {
+    return m_sBuyerName;
+  }
+
+  @NonNull
+  public PeppolOMTDD10ReportedTransactionBuilder buyerName (@Nullable final String s)
+  {
+    m_sBuyerName = s;
     return this;
   }
 
@@ -813,6 +860,11 @@ public class PeppolOMTDD10ReportedTransactionBuilder implements IBuilder <Report
       aLogHandler.error (sErrorPrefix + "DocumentCurrencyCode is missing");
       nErrs++;
     }
+    if (StringHelper.isEmpty (m_sSellerName))
+    {
+      aCondLog.error (sErrorPrefix + "SellerName is missing");
+      nErrs++;
+    }
     if (StringHelper.isEmpty (m_sSellerTaxID))
     {
       aLogHandler.error (sErrorPrefix + "SellerTaxID is missing");
@@ -821,6 +873,11 @@ public class PeppolOMTDD10ReportedTransactionBuilder implements IBuilder <Report
     if (StringHelper.isEmpty (m_sSellerTaxSchemeID))
     {
       aLogHandler.error (sErrorPrefix + "SellerTaxSchemeID is missing");
+      nErrs++;
+    }
+    if (StringHelper.isEmpty (m_sBuyerName))
+    {
+      aCondLog.error (sErrorPrefix + "BuyerName is missing");
       nErrs++;
     }
     if (StringHelper.isNotEmpty (m_sBuyerIDSchemeID))
@@ -947,6 +1004,11 @@ public class PeppolOMTDD10ReportedTransactionBuilder implements IBuilder <Report
             }
             aParty.addPartyTaxScheme (aPTS);
           }
+          {
+            final PartyLegalEntityType aPLE = new PartyLegalEntityType ();
+            aPLE.setRegistrationName (m_sSellerName);
+            aParty.addPartyLegalEntity (aPLE);
+          }
           a2.setParty (aParty);
         }
         a.setAccountingSupplierParty (a2);
@@ -973,6 +1035,11 @@ public class PeppolOMTDD10ReportedTransactionBuilder implements IBuilder <Report
               aPTS.setTaxScheme (new TaxSchemeType ());
             }
             aParty.addPartyTaxScheme (aPTS);
+          }
+          {
+            final PartyLegalEntityType aPLE = new PartyLegalEntityType ();
+            aPLE.setRegistrationName (m_sBuyerName);
+            aParty.addPartyLegalEntity (aPLE);
           }
           aAccountingCustomer.setParty (aParty);
         }
