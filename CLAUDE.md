@@ -35,7 +35,9 @@ mvn -pl peppol-om-tdd-datatypes generate-sources
 
 ## Module Structure
 
-Three Maven modules with strict build order (each depends on the previous):
+`peppol-om-bom` is the Bill of Materials (`dependencyManagement` only, `pom` packaging) listing all artifacts below. Its own parent is `com.helger:parent-pom`, not the project parent, so its version must be bumped together with the others. Add any new module to it.
+
+Three code modules with strict build order (each depends on the previous):
 
 1. **`peppol-om-testfiles`** — Bundles official OM TDD example XML files as classpath resources under `external/tdd/10/good/`. `PeppolOMTestFiles` exposes them as `ICommonsList<ClassPathResource>`.
 

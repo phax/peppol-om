@@ -24,6 +24,7 @@ The backing specifications are:
 
 This project consists of the following submodules (in alphabetic order)
 
+* `peppol-om-bom` - the Bill of Materials (BOM) with the managed versions of all peppol-om artifacts (since v1.2.5)
 * `peppol-om-tdd` - contains the main logic to create OM TDD documents based on PINT OM documents as well as documentation
     * Main class to build a complete TDD from scratch is `PeppolOMTDD10Builder`
     * To run the Schematron validation, use class `PeppolOMTDDValidator`
@@ -44,6 +45,20 @@ Add the following to your `pom.xml` to use this artifact, replacing `x.y.z` with
 </dependency>
 ```
 
+Alternatively use the following code in your `dependencyManagement` section to use it as a BOM:
+
+```xml
+<dependency>
+  <groupId>com.helger.peppol</groupId>
+  <artifactId>peppol-om-bom</artifactId>
+  <version>x.y.z</version>
+  <type>pom</type>
+  <scope>import</scope>
+</dependency>
+```
+
+Note: prior to v1.2.5 there was no dedicated BOM.
+
 # Building
 
 This project requires Apache Maven 3.x and Java 17 for building.
@@ -54,6 +69,11 @@ mvn clean install
 to build the solution.
 
 # News and noteworthy
+
+v1.2.5 - 2026-11-15
+* Requires at least ph-commons 12.7.1
+* Updated to ph-ubl 10.3.0 and ph-schematron 10.3.2
+* Added the new module `peppol-om-bom` as a Maven BOM (Bill of Materials) for all peppol-om artifacts
 
 v1.2.4 - 2026-10-22
 * Requires ph-commons 12.5.2
