@@ -27,7 +27,7 @@
   </parent>
   <groupId>com.helger.peppol</groupId>
   <artifactId>peppol-om-bom</artifactId>
-  <version>1.2.5</version>
+  <version>1.2.6-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>peppol-om-bom</name>
   <description>Bill of Materials for all peppol-om artifacts</description>
@@ -44,7 +44,7 @@
     <connection>scm:git:https://github.com/phax/peppol-om.git</connection>
     <developerConnection>scm:git:https://github.com/phax/peppol-om.git</developerConnection>
     <url>https://github.com/phax/peppol-om</url>
-    <tag>peppol-om-parent-pom-1.2.5</tag>
+    <tag>HEAD</tag>
   </scm>
   <organization>
     <name>Philip Helger</name>
