@@ -74,6 +74,8 @@ v1.2.5 - 2026-11-15
 * Requires at least ph-commons 12.7.1
 * Updated to ph-ubl 10.3.0 and ph-schematron 10.3.2
 * Added the new module `peppol-om-bom` as a Maven BOM (Bill of Materials) for all peppol-om artifacts
+* Added `sellerName` (IBT-027) and `buyerName` (IBT-044) to `PeppolOMTDD10ReportedTransactionBuilder`, emitted as `PartyLegalEntity/RegistrationName` and taken from Invoice/CreditNote in `initFromInvoice` and `initFromCreditNote`. See [PR #1](https://github.com/phax/peppol-om/pull/1) - thanks @vinit-thummar
+* **Behaviour change:** seller name and buyer name are now mandatory in `PeppolOMTDD10ReportedTransactionBuilder` - `build ()` returns `null` if they are missing
 
 v1.2.4 - 2026-10-22
 * Requires ph-commons 12.5.2

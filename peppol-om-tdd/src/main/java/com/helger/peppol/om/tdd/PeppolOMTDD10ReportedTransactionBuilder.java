@@ -172,9 +172,8 @@ public class PeppolOMTDD10ReportedTransactionBuilder implements IBuilder <Report
   }
 
   /**
-   * Set all fields except the TransportHeaderID from the provided UBL 2.1 Invoice.
-   * If the Invoice contains no UUID, it is calculated according to
-   * {@link PeppolOMInvoiceUUIDHelper}.
+   * Set all fields except the TransportHeaderID from the provided UBL 2.1 Invoice. If the Invoice
+   * contains no UUID, it is calculated according to {@link PeppolOMInvoiceUUIDHelper}.
    *
    * @param aInv
    *        The Invoice to read from. May not be <code>null</code>.
@@ -282,9 +281,8 @@ public class PeppolOMTDD10ReportedTransactionBuilder implements IBuilder <Report
   }
 
   /**
-   * Set all fields except the TransportHeaderID from the provided UBL 2.1 CreditNote.
-   * If the CreditNote contains no UUID, it is calculated according to
-   * {@link PeppolOMInvoiceUUIDHelper}.
+   * Set all fields except the TransportHeaderID from the provided UBL 2.1 CreditNote. If the
+   * CreditNote contains no UUID, it is calculated according to {@link PeppolOMInvoiceUUIDHelper}.
    *
    * @param aCN
    *        The CreditNote to read from. May not be <code>null</code>.
@@ -782,10 +780,10 @@ public class PeppolOMTDD10ReportedTransactionBuilder implements IBuilder <Report
 
   /**
    * Set the log handler that receives the messages of the required field checks, when calling
-   * {@link #build()}. It is not used by
-   * {@link #isEveryRequiredFieldSet(ErrorList)}. Missing or invalid required fields are
-   * reported as errors and non-fatal findings as warnings. The default handler logs to the logger of
-   * this class, use {@link ILogHandler#createForConsumer(java.util.function.Consumer)} or
+   * {@link #build()}. It is not used by {@link #isEveryRequiredFieldSet(ErrorList)}. Missing or
+   * invalid required fields are reported as errors and non-fatal findings as warnings. The default
+   * handler logs to the logger of this class, use
+   * {@link ILogHandler#createForConsumer(java.util.function.Consumer)} or
    * {@link ILogHandler#createNoOp()} to redirect or discard them. The handler is passed on to all
    * sub-builders that are created via a lambda <b>after</b> this call, so call this method before
    * adding any sub-elements. Sub-builders that are created externally and passed in are not
@@ -862,7 +860,7 @@ public class PeppolOMTDD10ReportedTransactionBuilder implements IBuilder <Report
     }
     if (StringHelper.isEmpty (m_sSellerName))
     {
-      aCondLog.error (sErrorPrefix + "SellerName is missing");
+      aLogHandler.error (sErrorPrefix + "SellerName is missing");
       nErrs++;
     }
     if (StringHelper.isEmpty (m_sSellerTaxID))
@@ -877,7 +875,7 @@ public class PeppolOMTDD10ReportedTransactionBuilder implements IBuilder <Report
     }
     if (StringHelper.isEmpty (m_sBuyerName))
     {
-      aCondLog.error (sErrorPrefix + "BuyerName is missing");
+      aLogHandler.error (sErrorPrefix + "BuyerName is missing");
       nErrs++;
     }
     if (StringHelper.isNotEmpty (m_sBuyerIDSchemeID))
